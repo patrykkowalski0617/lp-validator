@@ -62,7 +62,7 @@ const jira = () => {
                 (proof.toLowerCase().includes("kodem") &&
                   !proof.toLowerCase().includes("proc"));
               const proc = proof.toLowerCase().includes("proc");
-              const limit = proof.toLowerCase().includes("limit");
+              const limit = proof.toLowerCase().includes("limi");
 
               const data = limit
                 ? "limit"
