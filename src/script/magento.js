@@ -60,13 +60,13 @@ const magento = () => {
           // mechanic
           const mechanicFn = () => {
             const inpXY = document.querySelector(
-              "[id^=products_x_for_y_promo_]"
+              "[id^=products_x_for_y_promo_], [id^=products_new_x_for_y_promo_]"
             );
             const XYspendMoneyInp = document.querySelector(
-              "[id^=products_x_for_y_promo_step_]"
+              "[id^=products_x_for_y_promo_step_], [id^=products_new_x_for_y_promo_step_]"
             );
             const XYdiscountInp = document.querySelector(
-              "[id^=products_x_for_y_promo_discount_]"
+              "[id^=products_x_for_y_promo_discount_], [id^=products_new_x_for_y_promo_discount_]"
             );
             const { data, proof } = mechanic;
 
