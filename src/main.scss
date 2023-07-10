@@ -1,0 +1,22 @@
+.lp-validator-proof {
+  padding: 5px 15px;
+  background-color: #4f4f4f !important;
+  cursor: pointer;
+}
+
+body.lp-validator-body-flesh {
+  animation: body-flash 0.5s;
+}
+.lp-validator-copied {
+  outline: 3px solid #0197a2;
+}
+@keyframes body-flash {
+  from {
+    opacity: 0;
+    background: #444;
+  }
+  to {
+    opacity: 1;
+    background: #000;
+  }
+}
