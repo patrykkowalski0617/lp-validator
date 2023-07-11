@@ -19,31 +19,47 @@ const magento = () => {
             mechanic,
             termsAndConditionText,
           } = customJSON.parse(clipText);
-          const renderProof = (container, proof) => {
-            if (!container.parentElement.querySelector(".lp-validator-proof")) {
+          console.log(customJSON.parse(clipText));
+          const renderProof = (container, proof, warn, error) => {
+            if (!container.parentElement.querySelector(".lp-validator-info")) {
               container.insertAdjacentHTML(
                 "afterend",
-                `<p class='lp-validator-proof'>${proof}</p>`
+                `<div class='lp-validator-info ${
+                  error === "true" ? "lp-validator-error" : ""
+                } ${warn === "true" ? "lp-validator-warn" : ""}'>
+                  <p class='lp-validator-proof'>${proof}</p>
+                  <button class="lp-validator-skip">add</button>
+                </div>`
               );
+              const skipBtn =
+                container.parentElement.querySelector(".lp-validator-skip");
               const proofEl = container.parentElement.querySelector(
                 ".lp-validator-proof"
               );
-              proofEl.addEventListener("click", () => {
-                navigator.clipboard.writeText(proofEl.textContent);
-                proofEl.classList.add("lp-validator-copied");
+              const parent = proofEl.parentElement;
+              proofEl.addEventListener("click", (e) => {
+                navigator.clipboard.writeText(e.target.textContent);
+                parent.classList.add("lp-validator-copied");
                 setTimeout(() => {
-                  proofEl.classList.remove("lp-validator-copied");
+                  parent.classList.remove("lp-validator-copied");
                 }, 3000);
+              });
+              skipBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                parent.classList.toggle("lp-validator-skipped");
               });
             }
           };
           const fillInput = ({ proof, value, inpSelector, inpEl }) => {
             const inp = inpEl ? inpEl : document.querySelector(inpSelector);
-            inp.value = value;
-
-            renderProof(inp, proof);
-
-            forceChangeEvent(inpSelector);
+            if (inp) {
+              inp.value = value;
+              renderProof(inp, proof);
+              forceChangeEvent(inpSelector);
+            } else {
+              console.error("Input not found");
+              renderProof(inp, proof, true);
+            }
           };
           // title
           fillInput({
@@ -96,18 +112,21 @@ const magento = () => {
           // url
           const urlInp = document.querySelector("[name=url]");
           const formatUrl = (value) => {
-            if (value.includes("/") || value.includes(".")) {
-              const _a = value.lastIndexOf("/");
-              const _b = value.lastIndexOf(".");
-              const a = _a === -1 ? 0 : _a + 1;
-              const b = _b < a ? value.length : _b;
-              const newValue = value.substring(a, b);
-              return newValue;
+            console.log("value", value);
+            if (value) {
+              if (value.includes("/") || value.includes(".")) {
+                const _a = value.lastIndexOf("/");
+                const _b = value.lastIndexOf(".");
+                const a = _a === -1 ? 0 : _a + 1;
+                const b = _b < a ? value.length : _b;
+                const newValue = value.substring(a, b);
+                return newValue;
+              }
             }
           };
           const data = formatUrl(url.data);
           urlInp.value = data;
-          renderProof(urlInp.parentElement, url.proof);
+          renderProof(urlInp.parentElement, url.proof, url.error, url.warn);
           forceChangeEvent("[name=url]");
 
           // date start
@@ -118,7 +137,7 @@ const magento = () => {
             year: dateStart.data.substring(4),
           };
           dateStartInp.value = `${dateStr.day}/${dateStr.month}/${dateStr.year} 00:00`;
-          renderProof(dateStartInp, dateStart.proof);
+          renderProof(dateStartInp, dateStart.proof, dateStart.error);
           forceChangeEvent("[name=date_from]");
 
           // date end
@@ -140,48 +159,50 @@ const magento = () => {
           ) {
             document.querySelector("[name=use_teaser] + label").click();
           }
-          renderProof(teaserInp, teaser.proof);
+          renderProof(teaserInp.parentElement, teaser.proof);
 
           // headers dates
           const headersDates = () => {
             const h24 = 24 * 60 * 60 * 1000;
 
             const getDate = (inpSelector, source) => {
-              const { data: sourceDate, proof } = source;
               const inp = document.querySelector(inpSelector);
-              const sourceDay = sourceDate.substring(0, 2);
-              const sourceMonth = sourceDate.substring(2, 4);
-              const sourceYear = sourceDate.substring(4);
+              if (inp) {
+                const { data: sourceDate, proof } = source;
+                const sourceDay = sourceDate.substring(0, 2);
+                const sourceMonth = sourceDate.substring(2, 4);
+                const sourceYear = sourceDate.substring(4);
 
-              const newDate = inpSelector.includes("0")
-                ? new Date(
-                    new Date(
-                      `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                    ).getTime() + h24
-                  )
-                : inpSelector.includes("1")
-                ? new Date(
-                    new Date(
-                      `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                    ).getTime() -
-                      h24 * 2
-                  )
-                : inpSelector.includes("2")
-                ? new Date(
-                    new Date(
-                      `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                    ).getTime() - h24
-                  )
-                : null;
+                const newDate = inpSelector.includes("0")
+                  ? new Date(
+                      new Date(
+                        `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
+                      ).getTime() + h24
+                    )
+                  : inpSelector.includes("1")
+                  ? new Date(
+                      new Date(
+                        `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
+                      ).getTime() -
+                        h24 * 2
+                    )
+                  : inpSelector.includes("2")
+                  ? new Date(
+                      new Date(
+                        `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
+                      ).getTime() - h24
+                    )
+                  : null;
 
-              const yyyy = String(newDate.getFullYear());
-              const mm = String(newDate.getMonth() + 1).padStart(2, "0");
-              const dd = String(newDate.getDate()).padStart(2, "0");
-              const date = `${yyyy}-${mm}-${dd}T00:00`;
-              inp.value = date;
+                const yyyy = String(newDate.getFullYear());
+                const mm = String(newDate.getMonth() + 1).padStart(2, "0");
+                const dd = String(newDate.getDate()).padStart(2, "0");
+                const date = `${yyyy}-${mm}-${dd}T00:00`;
+                inp.value = date;
 
-              renderProof(inp, proof);
-              forceChangeEvent(inp);
+                renderProof(inp, proof);
+                forceChangeEvent(inp);
+              }
             };
             getDate("input#image-0_suffixPlaceholder", dateStart);
             getDate("input#image-1_suffixPlaceholder", dateEnd);
@@ -195,16 +216,12 @@ const magento = () => {
                .module__banner_hero .input__color`
             );
             const { data, proof } = hex;
-            hexInps.forEach((el, i) => {
-              el.value = `#${data}`;
-              // if (!i % 2) {
-              //   el.parentElement.insertAdjacentHTML(
-              //     "afterend",
-              //     `<p class='lp-validator-proof'>${proof}</p>`
-              //   );
-              // }
-              forceChangeEvent(el);
+            hexInps.forEach((el) => {
+              if (data.length) {
+                el.value = `#${data}`;
 
+                forceChangeEvent(el);
+              }
               renderProof(hexInps[0].parentElement, proof);
             });
           };
@@ -237,8 +254,9 @@ const magento = () => {
 
           renderProof(termsAndConditionTextInp, termsAndConditionText.proof);
           forceChangeEvent("[id*=terms_and_condition_content_]");
+
+          bodyFlesh();
         });
-        bodyFlesh();
       }
     });
   }

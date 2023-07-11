@@ -1,19 +1,64 @@
-.lp-validator-proof {
+.lp-validator-info {
   padding: 5px 15px;
   background-color: #4f4f4f !important;
-  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 9;
+  min-height: 30px;
+  max-width: 700px;
+  max-height: 200px;
+  border-radius: 15px;
+  margin: 15px 0;
+  .lp-validator-proof {
+    background-color: inherit !important;
+    margin: 0;
+    max-width: calc(100% - 30px);
+    cursor: pointer;
+  }
+  &.lp-validator-skipped .lp-validator-proof {
+    color: #797979 !important;
+  }
+  &:not(.lp-validator-skipped) {
+    box-shadow: 0px 0px 20px 2px #00ff00;
+    color: inherit !important;
+    .lp-validator-skip {
+      font-size: 0;
+      &::before {
+        content: "skip";
+        font-size: 10px;
+      }
+    }
+  }
 }
 
 body.lp-validator-body-flesh {
   animation: body-flash 0.5s;
 }
 .lp-validator-copied {
-  outline: 3px solid #0197a2;
+  outline: 2px solid #00ffff;
+}
+.lp-validator-warn:not(.lp-validator-skipped) {
+  box-shadow: 0px 0px 20px 5px #ffff00 !important;
+}
+.lp-validator-error:not(.lp-validator-skipped) {
+  box-shadow: 0px 0px 30px 5px #ff0000 !important;
+}
+
+.lp-validator-skip {
+  text-transform: uppercase;
+  font-weight: 300;
+  border: 3px #4f4f4f solid;
+  font-size: 10px;
+  margin: -5px -15px;
+  max-height: 50px;
+  width: 44px;
+  border-radius: 15px;
 }
 @keyframes body-flash {
   from {
     opacity: 0;
-    background: #444;
+    background: #6e6e6e;
   }
   to {
     opacity: 1;

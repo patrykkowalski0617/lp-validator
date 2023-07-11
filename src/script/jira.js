@@ -1,4 +1,5 @@
 import { bodyFlesh, customJSON } from "./helpers";
+import { termsAndConditionText, title } from "./jiraFns";
 
 const jira = () => {
   const jiraBody = document.querySelector("#jira");
@@ -6,22 +7,43 @@ const jira = () => {
   const taskData = {};
 
   if (jiraBody) {
-    const getTaskData = () => {
+    const collectTaskData = () => {
       const taskContentEl = jiraBody.querySelectorAll(".ak-renderer-document");
       const date = new Date();
       taskContentEl.forEach((el) => {
         el.querySelectorAll("p").forEach((p) => {
           const proof = p.textContent;
           const pText = proof.toLowerCase();
-          if (pText.includes("promocja") && pText.length > 150) {
-            const data = `<p>${p.innerHTML}</p>`
-              .replace("Tekst do regulaminu:", "")
-              .replace("tekst do regulaminu:", "");
-            taskData.termsAndConditionText = { data, proof };
-          } else if (pText.includes("tytuł:") || pText.includes("tytuł*:")) {
-            const start = proof.indexOf(":") + 1;
-            const data = proof.substring(start).trim();
-            taskData.title = { data, proof };
+          if (pText.includes("tytuł:") || pText.includes("tytuł*:")) {
+            taskData.title = title(proof, p, pText);
+          } else if (pText.includes("url:")) {
+            let a, warn, error, data;
+            if (p.querySelector("a")) {
+              a = p.querySelector("a");
+            } else {
+              a = document.querySelector(".ak-renderer-document a");
+              warn = true;
+            }
+            console.log("a", a);
+            if (a) {
+              data = a.href;
+            } else {
+              data = null;
+              error = true;
+            }
+            taskData.url = { data, proof, warn, error };
+          } else if (
+            pText.includes("promocja") &&
+            pText.includes("od") &&
+            pText.includes("do") &&
+            pText.includes("kod") &&
+            pText.length > 150
+          ) {
+            taskData.termsAndConditionText = termsAndConditionText(
+              proof,
+              p,
+              pText
+            );
           } else if (
             pText.includes("mechanika:") ||
             pText.includes("mechanika**:")
@@ -72,14 +94,11 @@ const jira = () => {
                 ? "amount"
                 : proc
                 ? "proc"
-                : null;
+                : "";
 
               taskData.mechanic = { data, proof };
             };
             mechanic();
-          } else if (pText.includes("url:")) {
-            const data = p.querySelector("a").href;
-            taskData.url = { data, proof };
           } else if (pText.includes("teaser:") || pText.includes("teaser (")) {
             const start = proof.indexOf(":");
             const data = String(proof.substring(start).includes("tak"));
@@ -94,7 +113,7 @@ const jira = () => {
               .join("");
             const data = take1.length < 5 ? take1 + date.getFullYear() : take1;
 
-            taskData.dateStart = { data, proof };
+            taskData.dateStart = { data, proof, error: true };
           } else if (pText.includes("data do")) {
             const take1 = pText
               .substring(pText.indexOf("data do"))
@@ -108,7 +127,8 @@ const jira = () => {
             taskData.dateEnd = { data, proof };
           } else if (pText.includes("hex")) {
             const start = proof.indexOf(":") + 1;
-            const data = proof.substring(start).replaceAll("#", "").trim();
+            const _data = proof.substring(start).replaceAll("#", "").trim();
+            const data = _data.length === 6 ? _data : "";
             taskData.hex = { data, proof };
           }
         });
@@ -118,7 +138,7 @@ const jira = () => {
     window.addEventListener("keypress", (e) => {
       if (e.code === "KeyQ" && e.ctrlKey) {
         console.clear();
-        getTaskData();
+        collectTaskData();
         console.log("taskData", taskData);
         const string = customJSON.stringify(taskData);
         navigator.clipboard.writeText(string);
