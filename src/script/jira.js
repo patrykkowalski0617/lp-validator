@@ -1,5 +1,5 @@
 import { bodyFlesh, customJSON } from "./helpers";
-import { termsAndConditionText, title } from "./jiraFns";
+import { termsAndConditionText, title, mechanic, code } from "./jiraFns";
 
 const jira = () => {
   const jiraBody = document.querySelector("#jira");
@@ -18,13 +18,14 @@ const jira = () => {
             taskData.title = title(proof, p, pText);
           } else if (pText.includes("url:")) {
             let a, warn, error, data;
+            console.log("p", p);
             if (p.querySelector("a")) {
               a = p.querySelector("a");
             } else {
               a = document.querySelector(".ak-renderer-document a");
               warn = true;
             }
-            console.log("a", a);
+
             if (a) {
               data = a.href;
             } else {
@@ -48,57 +49,8 @@ const jira = () => {
             pText.includes("mechanika:") ||
             pText.includes("mechanika**:")
           ) {
-            const code = () => {
-              const take1 = proof
-                .split(" ")
-                .filter((x) => {
-                  let i = 0;
-                  let character = "";
-                  let firstLetter = "";
-                  let secondLetter = "";
-                  while (i <= x.length) {
-                    character = x.charAt(i);
-                    if (x.replace(/[^a-z0-9]/gi, "").length === x.length) {
-                      if (character == character.toUpperCase() && i === 0) {
-                        firstLetter = true;
-                      }
-                      if (character == character.toUpperCase() && i === 1) {
-                        secondLetter = true;
-                      }
-                    }
-                    i++;
-                  }
-                  return firstLetter && secondLetter;
-                })
-                .join();
-              const data = isNaN(Number(take1)) ? take1 : "";
-              taskData.code = { data, proof };
-            };
-            code();
-            const mechanic = () => {
-              const proof = taskData.code.proof;
-
-              const XY = taskData.code.data.toLowerCase().includes("za");
-              const amount =
-                proof.toLowerCase().includes("kwoto") ||
-                (proof.toLowerCase().includes("kodem") &&
-                  !proof.toLowerCase().includes("proc"));
-              const proc = proof.toLowerCase().includes("proc");
-              const limit = proof.toLowerCase().includes("limi");
-
-              const data = limit
-                ? "limit"
-                : XY
-                ? "XY"
-                : amount
-                ? "amount"
-                : proc
-                ? "proc"
-                : "";
-
-              taskData.mechanic = { data, proof };
-            };
-            mechanic();
+            taskData.code = code(proof);
+            taskData.mechanic = mechanic(proof, taskData.code.data);
           } else if (pText.includes("teaser:") || pText.includes("teaser (")) {
             const start = proof.indexOf(":");
             const data = String(proof.substring(start).includes("tak"));

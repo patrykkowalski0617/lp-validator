@@ -32,8 +32,10 @@ const customJSON = {
         const keyLvl1 = el.split("||1||")[0];
         const keyLvl2 = el.split("||1||")[1].split("||2||")[0];
         const valLvl2 = el.split("||1||")[1].split("||2||")[1];
+        const correctBooleanType = (value) =>
+          value === "true" ? true : value === "false" ? false : value;
 
-        object[keyLvl1][keyLvl2] = valLvl2;
+        object[keyLvl1][keyLvl2] = correctBooleanType(valLvl2);
       });
     });
     console.log("object", object);

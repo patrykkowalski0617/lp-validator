@@ -1,4 +1,5 @@
 import { bodyFlesh, customJSON, forceChangeEvent } from "./helpers";
+import { renderProof, fillInput } from "./magento/helpers";
 
 const magento = () => {
   const magentoBody = document.querySelector("#html-body");
@@ -20,59 +21,25 @@ const magento = () => {
             termsAndConditionText,
           } = customJSON.parse(clipText);
           console.log(customJSON.parse(clipText));
-          const renderProof = (container, proof, warn, error) => {
-            if (!container.parentElement.querySelector(".lp-validator-info")) {
-              container.insertAdjacentHTML(
-                "afterend",
-                `<div class='lp-validator-info ${
-                  error === "true" ? "lp-validator-error" : ""
-                } ${warn === "true" ? "lp-validator-warn" : ""}'>
-                  <p class='lp-validator-proof'>${proof}</p>
-                  <button class="lp-validator-skip">add</button>
-                </div>`
-              );
-              const skipBtn =
-                container.parentElement.querySelector(".lp-validator-skip");
-              const proofEl = container.parentElement.querySelector(
-                ".lp-validator-proof"
-              );
-              const parent = proofEl.parentElement;
-              proofEl.addEventListener("click", (e) => {
-                navigator.clipboard.writeText(e.target.textContent);
-                parent.classList.add("lp-validator-copied");
-                setTimeout(() => {
-                  parent.classList.remove("lp-validator-copied");
-                }, 3000);
-              });
-              skipBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                parent.classList.toggle("lp-validator-skipped");
-              });
-            }
-          };
-          const fillInput = ({ proof, value, inpSelector, inpEl }) => {
-            const inp = inpEl ? inpEl : document.querySelector(inpSelector);
-            if (inp) {
-              inp.value = value;
-              renderProof(inp, proof);
-              forceChangeEvent(inpSelector);
-            } else {
-              console.error("Input not found");
-              renderProof(inp, proof, true);
-            }
-          };
+
           // title
           fillInput({
             proof: title.proof,
             value: title.data,
-            inpSelector: "[name=name]",
+            inpSelector: ".admin__field-control [name=name]",
           });
           // code
-          fillInput({
-            proof: code.proof,
-            value: code.data,
-            inpSelector: "[for^=banner_hero_promo_code_] + input",
-          });
+          const codeFn = () => {
+            const error = code.data.includes(",");
+
+            fillInput({
+              proof: code.proof,
+              value: code.data,
+              inpSelector: "[for^=banner_hero_promo_code_] + input",
+              error,
+            });
+          };
+          codeFn();
           // mechanic
           const mechanicFn = () => {
             const inpXY = document.querySelector(
@@ -86,33 +53,42 @@ const magento = () => {
             );
             const { data, proof } = mechanic;
 
-            switch (data) {
-              case "XY":
-                const zaIndex = code.data.toLowerCase().indexOf("za");
-                const XYspendMoney = code.data.substring(zaIndex + 2);
-                const XYdiscount = code.data.substring(0, zaIndex);
-                if (!inpXY.checked) {
-                  inpXY.click();
-                  XYspendMoneyInp.value = XYspendMoney;
-                  XYdiscountInp.value = XYdiscount;
-                  renderProof(inpXY.parentElement, proof);
-                  renderProof(XYspendMoneyInp, proof);
-                  renderProof(XYdiscountInp, proof);
-                }
-                break;
+            if (inpXY) {
+              switch (data) {
+                case "XY":
+                  const dataClean = code.data
+                    .toLowerCase()
+                    .split(",")
+                    .filter((x) => x.includes("za"))
+                    .join("");
 
-              default:
-                if (inpXY.checked) {
-                  inpXY.click();
-                }
-                break;
+                  const zaIndex = dataClean.toLowerCase().indexOf("za");
+                  const XYspendMoney = dataClean.substring(zaIndex + 2);
+                  const XYdiscount = dataClean.substring(0, zaIndex);
+                  if (!inpXY.checked) {
+                    inpXY.click();
+                    XYspendMoneyInp.value = XYspendMoney;
+                    XYdiscountInp.value = XYdiscount;
+                    renderProof({ container: inpXY.parentElement, proof });
+                    renderProof({ container: XYspendMoneyInp, proof });
+                    renderProof({ container: XYdiscountInp, proof });
+                  }
+                  break;
+
+                default:
+                  if (inpXY.checked) {
+                    inpXY.click();
+                  }
+                  break;
+              }
+            } else {
+              console.warn("inpXY not found");
             }
           };
           mechanicFn();
           // url
           const urlInp = document.querySelector("[name=url]");
           const formatUrl = (value) => {
-            console.log("value", value);
             if (value) {
               if (value.includes("/") || value.includes(".")) {
                 const _a = value.lastIndexOf("/");
@@ -126,9 +102,22 @@ const magento = () => {
           };
           const data = formatUrl(url.data);
           urlInp.value = data;
-          renderProof(urlInp.parentElement, url.proof, url.error, url.warn);
+          renderProof({
+            container: urlInp.parentElement,
+            proof: url.proof,
+            error: url.error,
+            warn: url.warn,
+          });
           forceChangeEvent("[name=url]");
+          const filterBtnInLpListView = document.querySelector(
+            "[data-action=grid-filter-apply]"
+          );
 
+          if (filterBtnInLpListView) {
+            setTimeout(() => {
+              filterBtnInLpListView.click();
+            }, 500);
+          }
           // date start
           const dateStartInp = document.querySelector("[name=date_from]");
           const dateStr = {
@@ -136,8 +125,20 @@ const magento = () => {
             month: dateStart.data.substring(2, 4),
             year: dateStart.data.substring(4),
           };
-          dateStartInp.value = `${dateStr.day}/${dateStr.month}/${dateStr.year} 00:00`;
-          renderProof(dateStartInp, dateStart.proof, dateStart.error);
+          const date = new Date();
+          const taskStartDate = `${dateStr.day}/${dateStr.month}/${dateStr.year} 00:00`;
+          const todayDate = `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()} 00:00`;
+          dateStartInp.value = teaser.data === true ? taskStartDate : todayDate;
+          const startProof =
+            teaser.data === true
+              ? dateStart.proof
+              : `Data dzisiejsza ponieważ: "${teaser.proof}"`;
+          renderProof({
+            container: dateStartInp,
+            proof: startProof,
+          });
           forceChangeEvent("[name=date_from]");
 
           // date end
@@ -148,18 +149,21 @@ const magento = () => {
             year: dateEnd.data.substring(4),
           };
           dateEndInp.value = `${dateEndObj.day}/${dateEndObj.month}/${dateEndObj.year} 23:59`;
-          renderProof(dateEndInp, dateEnd.proof);
+          renderProof({ container: dateEndInp, proof: dateEnd.proof });
           forceChangeEvent("[name=date_to]");
 
           // teaser
           const teaserInp = document.querySelector("[name=use_teaser]");
           if (
-            (teaser.data === "true" && teaserInp.value === "0") ||
-            (teaser.data === "false" && teaserInp.value === "1")
+            (teaser.data === true && teaserInp.value === 0) ||
+            (teaser.data === false && teaserInp.value === 1)
           ) {
             document.querySelector("[name=use_teaser] + label").click();
           }
-          renderProof(teaserInp.parentElement, teaser.proof);
+          renderProof({
+            container: teaserInp.parentElement,
+            proof: teaser.proof,
+          });
 
           // headers dates
           const headersDates = () => {
@@ -183,14 +187,13 @@ const magento = () => {
                   ? new Date(
                       new Date(
                         `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                      ).getTime() -
-                        h24 * 2
+                      ).getTime() - h24
                     )
                   : inpSelector.includes("2")
                   ? new Date(
                       new Date(
                         `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                      ).getTime() - h24
+                      ).getTime()
                     )
                   : null;
 
@@ -200,7 +203,7 @@ const magento = () => {
                 const date = `${yyyy}-${mm}-${dd}T00:00`;
                 inp.value = date;
 
-                renderProof(inp, proof);
+                renderProof({ container: inp, proof });
                 forceChangeEvent(inp);
               }
             };
@@ -222,7 +225,7 @@ const magento = () => {
 
                 forceChangeEvent(el);
               }
-              renderProof(hexInps[0].parentElement, proof);
+              renderProof({ container: hexInps[0].parentElement, proof });
             });
           };
           hexFn();
@@ -231,7 +234,10 @@ const magento = () => {
             const btn = document.querySelectorAll(
               ".module__banner_hero .chill-btn"
             )[2];
-            btn.click();
+            if (btn) {
+              btn.click();
+            }
+            console.warn("btn is not found");
           };
           bannerHeroDefault();
 
@@ -252,7 +258,10 @@ const magento = () => {
           );
           termsAndConditionTextInp.value = termsAndConditionText.data;
 
-          renderProof(termsAndConditionTextInp, termsAndConditionText.proof);
+          renderProof({
+            container: termsAndConditionTextInp,
+            proof: termsAndConditionText.proof,
+          });
           forceChangeEvent("[id*=terms_and_condition_content_]");
 
           bodyFlesh();

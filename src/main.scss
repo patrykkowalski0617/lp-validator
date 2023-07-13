@@ -44,6 +44,9 @@ body.lp-validator-body-flesh {
 .lp-validator-error:not(.lp-validator-skipped) {
   box-shadow: 0px 0px 30px 5px #ff0000 !important;
 }
+.lp-validator-compatible:not(.lp-validator-skipped) {
+  box-shadow: 0px 0px 30px 5px #0000ff !important;
+}
 
 .lp-validator-skip {
   text-transform: uppercase;
