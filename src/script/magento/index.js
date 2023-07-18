@@ -1,12 +1,13 @@
-import { bodyFlesh, customJSON, forceChangeEvent } from "./helpers";
-import { renderProof, fillInput } from "./magento/helpers";
+import { bodyFlesh, customJSON, forceChangeEvent } from "../helpers";
+import { renderProof, fillInput } from "./helpersMagento";
+import titleFn from "./title";
+import urlFn from "./url";
 
 const magento = (magentoBody) => {
   window.addEventListener("keypress", (e) => {
     if (e.code === "KeyQ" && e.ctrlKey) {
       console.clear();
-
-      navigator.clipboard.readText().then((clipText) => {
+      navigator.clipboard.readText().then((cliproofLowerCase) => {
         const {
           title,
           url,
@@ -17,20 +18,12 @@ const magento = (magentoBody) => {
           code,
           mechanic,
           terms,
-        } = customJSON.parse(clipText);
-        console.log(customJSON.parse(clipText));
+        } = customJSON.parse(cliproofLowerCase);
+        console.log(customJSON.parse(cliproofLowerCase));
 
-        // title
-        const titleFn = () => {
-          if (title) {
-            fillInput({
-              proof: title.proof,
-              value: title.data,
-              inpSelector: ".admin__field-control [name=name]",
-            });
-          }
-        };
-        titleFn();
+        titleFn(title);
+        urlFn(url);
+
         // code
         const codeFn = () => {
           if (code) {
@@ -93,43 +86,6 @@ const magento = (magentoBody) => {
           }
         };
         mechanicFn();
-        // url
-        const urlFn = () => {
-          if (url) {
-            const urlInp = document.querySelector("[name=url]");
-            const formatUrl = (value) => {
-              if (value) {
-                if (value.includes("/") || value.includes(".")) {
-                  const _a = value.lastIndexOf("/");
-                  const _b = value.lastIndexOf(".");
-                  const a = _a === -1 ? 0 : _a + 1;
-                  const b = _b < a ? value.length : _b;
-                  const newValue = value.substring(a, b);
-                  return newValue;
-                }
-              }
-            };
-            const data = formatUrl(url.data);
-            urlInp.value = data;
-            renderProof({
-              container: urlInp.parentElement,
-              proof: url.proof,
-              error: url.error,
-              warn: url.warn,
-            });
-            forceChangeEvent("[name=url]");
-            const filterBtnInLpListView = document.querySelector(
-              "[data-action=grid-filter-apply]"
-            );
-
-            if (filterBtnInLpListView) {
-              setTimeout(() => {
-                filterBtnInLpListView.click();
-              }, 500);
-            }
-          }
-        };
-        urlFn();
 
         // date start
         const dateStartFn = () => {
@@ -284,16 +240,21 @@ const magento = (magentoBody) => {
         listingDefault();
 
         // terms zawartość
-        const termsInp = document.querySelector(
-          "[id*=terms_and_condition_content_]"
-        );
-        termsInp.value = terms.data;
+        const termsFn = () => {
+          if (terms) {
+            const termsInp = document.querySelector(
+              "[id*=terms_and_condition_content_]"
+            );
+            termsInp.value = terms.data;
 
-        renderProof({
-          container: termsInp,
-          proof: terms.proof,
-        });
-        forceChangeEvent("[id*=terms_and_condition_content_]");
+            renderProof({
+              container: termsInp,
+              proof: terms.proof,
+            });
+            forceChangeEvent("[id*=terms_and_condition_content_]");
+          }
+        };
+        termsFn();
 
         bodyFlesh();
       });

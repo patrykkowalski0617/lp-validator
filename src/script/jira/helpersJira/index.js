@@ -1,1 +1,1 @@
-export { default as extractDateFromPText } from "./extractDateFromPText";
+export { default as extractDateFromProof } from "./extractDateFromProof";

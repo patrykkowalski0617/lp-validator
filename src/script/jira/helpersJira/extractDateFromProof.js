@@ -1,6 +1,6 @@
-const extractDateFromPText = (pText, includes) => {
-  const date = pText
-    .substring(pText.indexOf(includes))
+const extractDateFromProof = (proofLowerCase, includes) => {
+  const date = proofLowerCase
+    .substring(proofLowerCase.indexOf(includes))
     .split(" ")
     .filter((a) => !a.includes(":"))
     .map((x) => x.replace(/\D/g, ""))
@@ -10,4 +10,4 @@ const extractDateFromPText = (pText, includes) => {
   return data;
 };
 
-export default extractDateFromPText;
+export default extractDateFromProof;

@@ -1,6 +1,6 @@
 import "./main.scss";
-import { magento } from "./script";
 import jira from "./script/jira";
+import magento from "./script/magento";
 
 const jiraBody = document.querySelector("#jira");
 const magentoBody = document.querySelector("#html-body");

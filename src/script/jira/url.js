@@ -1,20 +1,13 @@
-const url = (proof, p) => {
-  let a, warn, error, data;
-
-  if (p.querySelector("a")) {
-    a = p.querySelector("a");
-  } else {
-    a = document.querySelector(".ak-renderer-document a");
-    warn = true;
-  }
-
-  if (a) {
-    data = a.href;
-  } else {
-    data = null;
+const url = (proof, p, proofLowerCase) => {
+  let error, data;
+  if (proofLowerCase.includes("url:")) {
+    data = p.querySelector("a").href;
+  } else if (p.querySelector("a")) {
+    data = p.querySelector("a").href;
     error = true;
   }
-  return { data, proof, warn, error };
+
+  return { data, proof, error };
 };
 
 export default url;

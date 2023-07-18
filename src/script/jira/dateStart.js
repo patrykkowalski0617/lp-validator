@@ -1,7 +1,7 @@
-import { extractDateFromPText } from "./helpersJira";
+import { extractDateFromProof } from "./helpersJira";
 
-const dateStart = (proof, pText) => {
-  const data = extractDateFromPText(pText, "data od");
+const dateStart = (proof, proofLowerCase) => {
+  const data = extractDateFromProof(proofLowerCase, "data od");
 
   return { data, proof };
 };

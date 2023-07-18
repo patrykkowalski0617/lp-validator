@@ -17,33 +17,46 @@ const jira = (jiraBody) => {
     taskContentEl.forEach((el) => {
       el.querySelectorAll("p").forEach((p) => {
         const proof = p.textContent;
-        const pText = proof.toLowerCase();
-        if (pText.includes("tytuł:") || pText.includes("tytuł*:")) {
-          taskData.title = title(proof, p, pText);
-        } else if (pText.includes("url:")) {
-          taskData.url = url(proof, p);
-        } else if (
-          pText.includes("promocja") &&
-          pText.includes("od") &&
-          pText.includes("do") &&
-          pText.includes("kod") &&
-          pText.length > 150
+        const proofLowerCase = proof.toLowerCase();
+        if (
+          proofLowerCase.includes("tytuł:") ||
+          proofLowerCase.includes("tytuł*:")
         ) {
-          taskData.terms = terms(proof, p, pText);
+          taskData.title = title(proof, p, proofLowerCase);
         } else if (
-          pText.includes("mechanika:") ||
-          pText.includes("mechanika**:")
+          (proofLowerCase.includes("url:") || p.querySelector("a")) &&
+          // return data from first p that pass test
+          !taskData.url
+        ) {
+          taskData.url = url(proof, p, proofLowerCase);
+        } else if (
+          proofLowerCase.includes("promocja") &&
+          proofLowerCase.includes("od") &&
+          proofLowerCase.includes("do") &&
+          proofLowerCase.includes("kod") &&
+          proofLowerCase.length > 150
+        ) {
+          taskData.terms = terms(proof, p, proofLowerCase);
+        } else if (
+          proofLowerCase.includes("mechanika:") ||
+          proofLowerCase.includes("mechanika**:")
         ) {
           taskData.code = code(proof);
           taskData.mechanic = mechanic(proof, taskData.code.data);
-        } else if (pText.includes("teaser:") || pText.includes("teaser (")) {
+        } else if (
+          proofLowerCase.includes("teaser:") ||
+          proofLowerCase.includes("teaser (")
+        ) {
           taskData.teaser = teaser(proof);
-        } else if (pText.includes("data od")) {
-          taskData.dateStart = dateStart(proof, pText);
-        } else if (pText.includes("data do")) {
-          taskData.dateEnd = dateEnd(proof, pText);
-        } else if (pText.includes("hex")) {
-          taskData.hex = hex(proof);
+        } else if (proofLowerCase.includes("data od")) {
+          taskData.dateStart = dateStart(proof, proofLowerCase);
+        } else if (proofLowerCase.includes("data do")) {
+          taskData.dateEnd = dateEnd(proof, proofLowerCase);
+        } else if (
+          proofLowerCase.includes("hex") ||
+          proofLowerCase.includes("kolor:")
+        ) {
+          taskData.hex = hex(proof, proofLowerCase);
         }
       });
     });

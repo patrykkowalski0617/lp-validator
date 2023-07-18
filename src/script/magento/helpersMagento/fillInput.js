@@ -1,10 +1,18 @@
 import { forceChangeEvent } from "../../helpers";
 import renderProof from "./renderProof";
 
-const fillInput = ({ proof, value, inpSelector, inpEl, warn, error }) => {
-  const inp = inpEl ? inpEl : document.querySelector(inpSelector);
+const fillInput = ({
+  proof,
+  value,
+  inpSelector,
+  inpEl,
+  renderEl,
+  warn,
+  error,
+}) => {
+  const inp = inpEl || document.querySelector(inpSelector);
   if (inp) {
-    renderProof({ container: inp, proof, warn, error, inp, value });
+    renderProof({ container: renderEl || inp, proof, warn, error, inp, value });
     inp.value = value;
     forceChangeEvent(inpSelector);
   } else {

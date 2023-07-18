@@ -1,4 +1,4 @@
-const terms = (proof, p, pText) => {
+const terms = (proof, p, proofLowerCase) => {
   const data = `<p>${p.innerHTML
     .replace("Tekst do regulaminu:", "")
     .replace("tekst do regulaminu:", "")
