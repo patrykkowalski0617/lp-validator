@@ -1,5 +1,11 @@
 import "./main.scss";
-import { jira, magento } from "./script";
+import { magento } from "./script";
+import jira from "./script/jira";
 
-jira();
-magento();
+const jiraBody = document.querySelector("#jira");
+const magentoBody = document.querySelector("#html-body");
+if (jiraBody) {
+  jira(jiraBody);
+} else if (magentoBody) {
+  magento(magentoBody);
+}
