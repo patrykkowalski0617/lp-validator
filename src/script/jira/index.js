@@ -66,7 +66,7 @@ const jira = (jiraBody) => {
     if (e.code === "KeyQ" && e.ctrlKey) {
       console.clear();
       collectTaskData();
-      console.log("taskData", taskData);
+      console.log("jira taskData", taskData);
       const string = customJSON.stringify(taskData);
       navigator.clipboard.writeText(string);
       bodyFlesh();

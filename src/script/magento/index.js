@@ -1,13 +1,17 @@
 import { bodyFlesh, customJSON, forceChangeEvent } from "../helpers";
-import { renderProof, fillInput } from "./helpersMagento";
+import { renderProof } from "./helpersMagento";
 import titleFn from "./title";
 import urlFn from "./url";
+import codeFn from "./code";
+import dateStartFn from "./dateStart";
+import dateEndFn from "./dateEnd";
 
 const magento = (magentoBody) => {
   window.addEventListener("keypress", (e) => {
     if (e.code === "KeyQ" && e.ctrlKey) {
       console.clear();
       navigator.clipboard.readText().then((cliproofLowerCase) => {
+        const taskData = customJSON.parse(cliproofLowerCase);
         const {
           title,
           url,
@@ -18,26 +22,14 @@ const magento = (magentoBody) => {
           code,
           mechanic,
           terms,
-        } = customJSON.parse(cliproofLowerCase);
-        console.log(customJSON.parse(cliproofLowerCase));
+        } = taskData;
+        console.log("magento taskData", taskData);
 
         titleFn(title);
         urlFn(url);
-
-        // code
-        const codeFn = () => {
-          if (code) {
-            const error = code.data.includes(",");
-
-            fillInput({
-              proof: code.proof,
-              value: code.data,
-              inpSelector: "[for^=banner_hero_promo_code_] + input",
-              error,
-            });
-          }
-        };
-        codeFn();
+        codeFn(code);
+        dateStartFn(dateStart, teaser);
+        dateEndFn(dateEnd);
         // mechanic
         const mechanicFn = () => {
           if (mechanic) {
@@ -87,49 +79,6 @@ const magento = (magentoBody) => {
         };
         mechanicFn();
 
-        // date start
-        const dateStartFn = () => {
-          if (dateStart) {
-            const dateStartInp = document.querySelector("[name=date_from]");
-            const dateStr = {
-              day: dateStart.data.substring(0, 2),
-              month: dateStart.data.substring(2, 4),
-              year: dateStart.data.substring(4),
-            };
-            const date = new Date();
-            const taskStartDate = `${dateStr.day}/${dateStr.month}/${dateStr.year} 00:00`;
-            const todayDate = `${date.getDate()}/${
-              date.getMonth() + 1
-            }/${date.getFullYear()} 00:00`;
-            dateStartInp.value =
-              teaser.data === true ? taskStartDate : todayDate;
-            const startProof =
-              teaser.data === true
-                ? dateStart.proof
-                : `Data dzisiejsza ponieważ: "${teaser.proof}"`;
-            renderProof({
-              container: dateStartInp,
-              proof: startProof,
-            });
-            forceChangeEvent("[name=date_from]");
-          }
-        };
-        dateStartFn();
-        // date end
-        const dateEndFn = () => {
-          if (dateEnd) {
-            const dateEndInp = document.querySelector("[name=date_to]");
-            const dateEndObj = {
-              day: dateEnd.data.substring(0, 2),
-              month: dateEnd.data.substring(2, 4),
-              year: dateEnd.data.substring(4),
-            };
-            dateEndInp.value = `${dateEndObj.day}/${dateEndObj.month}/${dateEndObj.year} 23:59`;
-            renderProof({ container: dateEndInp, proof: dateEnd.proof });
-            forceChangeEvent("[name=date_to]");
-          }
-        };
-        dateEndFn();
         // teaser
         const teaserInp = document.querySelector("[name=use_teaser]");
         const teaserFn = () => {
