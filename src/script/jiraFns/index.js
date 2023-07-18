@@ -1,4 +1,9 @@
-export { default as termsAndConditionText } from "./termsAndConditionText";
+export { default as terms } from "./terms";
 export { default as title } from "./title";
 export { default as mechanic } from "./mechanic";
 export { default as code } from "./code";
+export { default as teaser } from "./teaser";
+export { default as url } from "./url";
+export { default as dateStart } from "./dateStart";
+export { default as dateEnd } from "./dateEnd";
+export { default as hex } from "./hex";

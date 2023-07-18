@@ -1,7 +1,7 @@
 const renderProof = ({ inp, value, container, proof, warn, error }) => {
   if (container) {
     const oryginalVal = inp ? inp.value : null;
-    console.log(container, oryginalVal);
+
     const alreadyRenderedProof =
       container.parentElement.querySelector(".lp-validator-info");
 

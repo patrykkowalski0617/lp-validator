@@ -1,4 +1,4 @@
-const termsAndConditionText = (proof, p, pText) => {
+const terms = (proof, p, pText) => {
   const data = `<p>${p.innerHTML
     .replace("Tekst do regulaminu:", "")
     .replace("tekst do regulaminu:", "")
@@ -8,4 +8,4 @@ const termsAndConditionText = (proof, p, pText) => {
   return { data, proof };
 };
 
-export default termsAndConditionText;
+export default terms;
