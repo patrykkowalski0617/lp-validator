@@ -30,6 +30,7 @@ const magento = (magentoBody) => {
         codeFn(code);
         dateStartFn(dateStart, teaser);
         dateEndFn(dateEnd);
+
         // mechanic
         const mechanicFn = () => {
           if (mechanic) {
@@ -166,6 +167,24 @@ const magento = (magentoBody) => {
         };
         hexFn();
 
+        // terms zawartość
+        const termsFn = () => {
+          if (terms) {
+            const termsInp = document.querySelector(
+              "[id*=terms_and_condition_content_]"
+            );
+            termsInp.value = terms.data;
+
+            renderProof({
+              container: termsInp,
+              proof: terms.proof,
+            });
+            forceChangeEvent("[id*=terms_and_condition_content_]");
+          }
+        };
+        termsFn();
+
+        // Default clicks
         const bannerHeroDefault = () => {
           const btn = document.querySelectorAll(
             ".module__banner_hero .chill-btn"
@@ -187,23 +206,6 @@ const magento = (magentoBody) => {
           });
         };
         listingDefault();
-
-        // terms zawartość
-        const termsFn = () => {
-          if (terms) {
-            const termsInp = document.querySelector(
-              "[id*=terms_and_condition_content_]"
-            );
-            termsInp.value = terms.data;
-
-            renderProof({
-              container: termsInp,
-              proof: terms.proof,
-            });
-            forceChangeEvent("[id*=terms_and_condition_content_]");
-          }
-        };
-        termsFn();
 
         bodyFlesh();
       });
