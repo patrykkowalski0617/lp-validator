@@ -1,4 +1,4 @@
-import { forceChangeEvent } from "../../helpers";
+import { forceChangeEvent } from "../../_helpers";
 import renderProof from "./renderProof";
 
 const fillInput = ({

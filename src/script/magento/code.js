@@ -1,4 +1,4 @@
-import { fillInput } from "./helpersMagento";
+import { fillInput } from "./_helpers";
 
 const code = (code) => {
   if (code) {

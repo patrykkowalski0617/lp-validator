@@ -6,9 +6,8 @@ const dataPicker = ({ paragraphs, keyText, findDataFn }) => {
   if (!paragraph) return;
   const proof = paragraph.textContent;
   const data = findDataFn({ paragraph, proof, keyText });
-  const isError = !proof.toLowerCase().includes(keyText);
 
-  return { data, proof, isError };
+  return { data, proof };
 };
 
 export default dataPicker;

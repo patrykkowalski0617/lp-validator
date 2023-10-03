@@ -1,4 +1,4 @@
-import { fillInput } from "./helpersMagento";
+import { fillInput } from "./_helpers";
 
 const dateStart = (dateStart, teaser) => {
   if (dateStart) {

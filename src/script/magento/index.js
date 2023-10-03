@@ -1,5 +1,5 @@
-import { bodyFlesh, customJSON, forceChangeEvent } from "../helpers";
-import { renderProof } from "./helpersMagento";
+import { bodyFlesh, customJSON, forceChangeEvent } from "../_helpers";
+import { renderProof } from "./_helpers";
 import titleFn from "./title";
 import urlFn from "./url";
 import codeFn from "./code";

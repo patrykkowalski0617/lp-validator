@@ -1,4 +1,4 @@
-import { extractDateFromProof, dataPicker } from "../helpers";
+import { extractDateFromProof, dataPicker } from "../_helpers";
 
 const dateEnd = (paragraphs) => {
   const keyText = ["data do:"];
