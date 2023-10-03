@@ -1,7 +1,7 @@
 import { extractDateFromProof, dataPicker } from "../helpers";
 
 const dateStart = (paragraphs) => {
-  const keyText = "data od:";
+  const keyText = ["data od:"];
   const findDataFn = ({ proof, keyText }) =>
     extractDateFromProof({ proof, keyText });
 

@@ -1,7 +1,8 @@
 const findParagraphThatIncludes = (keyText) => ({
   in: (paragraphs) => {
+    console.log("paragraphs", paragraphs);
     return Array.from(paragraphs).find((paragraph) =>
-      paragraph.textContent.toLowerCase().includes(keyText)
+      keyText.some((txt) => paragraph.textContent.toLowerCase().includes(txt))
     );
   },
 });

@@ -1,13 +1,13 @@
 import { bodyFlesh, customJSON } from "../helpers";
 import terms from "./terms";
-import title from "./title";
-import mechanic from "./mechanic";
-import url from "./url/url";
 import teaser from "./teaser";
-import dateStart from "./dateStart/dateStart";
-import dateEnd from "./dateEnd/dateEnd";
 import hex from "./hex";
 import code from "./code";
+import dateStart from "./dateStart/dateStart";
+import dateEnd from "./dateEnd/dateEnd";
+import url from "./url/url";
+import title from "./title/title";
+import mechanic from "./mechanic/mechanic";
 
 const jira = (jiraBody) => {
   const taskData = {};
@@ -17,6 +17,7 @@ const jira = (jiraBody) => {
     taskData.dateStart = dateStart(paragraphs);
     taskData.dateEnd = dateEnd(paragraphs);
     taskData.url = url(paragraphs);
+    taskData.title = title(paragraphs);
 
     taskContentEls.forEach((el) => {
       el.querySelectorAll("p").forEach((p) => {
@@ -24,11 +25,6 @@ const jira = (jiraBody) => {
         const proofLowerCase = proof.toLowerCase();
 
         if (
-          proofLowerCase.includes("tytuł:") ||
-          proofLowerCase.includes("tytuł*:")
-        ) {
-          taskData.title = title(proof, p, proofLowerCase);
-        } else if (
           proofLowerCase.includes("promocja") &&
           proofLowerCase.includes("od") &&
           proofLowerCase.includes("do") &&
@@ -42,7 +38,7 @@ const jira = (jiraBody) => {
           proofLowerCase.includes("mechanika**:")
         ) {
           taskData.code = code(proof);
-          taskData.mechanic = mechanic(proof, taskData.code.data);
+          taskData._mechanic = mechanic(proof, taskData.code.data);
         } else if (
           proofLowerCase.includes("teaser:") ||
           proofLowerCase.includes("teaser (")
