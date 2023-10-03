@@ -1,7 +1,7 @@
 import { extractDateFromProof } from "./helpersJira";
 
-const dateEnd = (proof, proofLowerCase) => {
-  const data = extractDateFromProof(proofLowerCase, "data do");
+const dateEnd = (proof) => {
+  const data = extractDateFromProof(proof, "data do");
 
   return { data, proof };
 };

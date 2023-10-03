@@ -27,9 +27,26 @@ const magento = (magentoBody) => {
 
         titleFn(title);
         urlFn(url);
-        codeFn(code);
+        // teaser
+        const teaserInp = document.querySelector("[name=use_teaser]");
+        const teaserFn = () => {
+          if (teaser) {
+            if (
+              (teaser.data === true && teaserInp.value === 0) ||
+              (teaser.data === false && teaserInp.value === 1)
+            ) {
+              document.querySelector("[name=use_teaser] + label").click();
+            }
+            renderProof({
+              container: teaserInp.parentElement,
+              proof: teaser.proof,
+            });
+          }
+        };
+        teaserFn();
         dateStartFn(dateStart, teaser);
         dateEndFn(dateEnd);
+        codeFn(code);
 
         // mechanic
         const mechanicFn = () => {
@@ -79,24 +96,6 @@ const magento = (magentoBody) => {
           }
         };
         mechanicFn();
-
-        // teaser
-        const teaserInp = document.querySelector("[name=use_teaser]");
-        const teaserFn = () => {
-          if (teaser) {
-            if (
-              (teaser.data === true && teaserInp.value === 0) ||
-              (teaser.data === false && teaserInp.value === 1)
-            ) {
-              document.querySelector("[name=use_teaser] + label").click();
-            }
-            renderProof({
-              container: teaserInp.parentElement,
-              proof: teaser.proof,
-            });
-          }
-        };
-        teaserFn();
 
         // headers dates
         const headersDates = () => {
@@ -169,10 +168,10 @@ const magento = (magentoBody) => {
 
         // terms zawartość
         const termsFn = () => {
-          if (terms) {
-            const termsInp = document.querySelector(
-              "[id*=terms_and_condition_content_]"
-            );
+          const termsInp = document.querySelector(
+            "[id*=terms_and_condition_content_]"
+          );
+          if (terms && termsInp) {
             termsInp.value = terms.data;
 
             renderProof({

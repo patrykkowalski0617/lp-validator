@@ -3,6 +3,8 @@ const terms = (proof, p, proofLowerCase) => {
     .replace("Tekst do regulaminu:", "")
     .replace("tekst do regulaminu:", "")
     .replace("&nbsp;", " ")
+    .replace("<br/>", " ")
+    .replace("<br>", " ")
     .trim()}</p>`;
 
   return { data, proof };
