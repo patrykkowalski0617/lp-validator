@@ -1,7 +1,7 @@
-import { findParagraphThatIncludes } from ".";
+import { dataFinder_ParagraphThatIncludes } from "./";
 
 const dataPicker = ({ paragraphs, keyText, extractData }) => {
-  const paragraph = findParagraphThatIncludes(keyText).in(paragraphs);
+  const paragraph = dataFinder_ParagraphThatIncludes(keyText).in(paragraphs);
 
   if (!paragraph) return;
   const proof = paragraph.textContent;
