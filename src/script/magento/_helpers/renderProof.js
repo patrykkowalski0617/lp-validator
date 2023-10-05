@@ -39,6 +39,7 @@ const renderProof = ({ inp, value, container, proof, warn, error }) => {
       isOryginalVal = !isOryginalVal;
       parent.classList.toggle("lp-validator-skipped");
     });
+    return skipBtn.parentElement;
   }
 };
 

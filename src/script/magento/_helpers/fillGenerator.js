@@ -1,10 +1,13 @@
 import { bodyFlesh, customJSON, forceChangeEvent } from "../../_helpers";
 import { renderProof } from "../_helpers";
-import titleFn from "../title";
-import urlFn from "../url";
-import codeFn from "../code";
-import dateStartFn from "../dateStart";
-import dateEndFn from "../dateEnd";
+import {
+  titleFn,
+  urlFn,
+  codeFn,
+  dateStartFn,
+  dateEndFn,
+  teaserFn,
+} from "../dataInjectors";
 
 const fillGenerator = () => {
   console.clear();
@@ -25,23 +28,7 @@ const fillGenerator = () => {
 
     titleFn(title);
     urlFn(url);
-    // teaser
-    const teaserInp = document.querySelector("[name=use_teaser]");
-    const teaserFn = () => {
-      if (teaser) {
-        if (
-          (teaser.data === true && teaserInp.value === 0) ||
-          (teaser.data === false && teaserInp.value === 1)
-        ) {
-          document.querySelector("[name=use_teaser] + label").click();
-        }
-        renderProof({
-          container: teaserInp.parentElement,
-          proof: teaser.proof,
-        });
-      }
-    };
-    teaserFn();
+    teaserFn(teaser);
     dateStartFn(dateStart, teaser);
     dateEndFn(dateEnd);
     codeFn(code);
