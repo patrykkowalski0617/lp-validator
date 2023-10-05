@@ -1,7 +1,7 @@
-import { extractDateFromProof, dataPicker } from "../_helpers";
+import { extractDateFromProof, dataPicker } from "../../_helpers";
 
-const dateEnd = (paragraphs) => {
-  const keyText = ["data do:"];
+const dateStart = (paragraphs) => {
+  const keyText = ["data od:"];
   const extractData = ({ proof, keyText }) =>
     extractDateFromProof({ proof, keyText });
 
@@ -12,4 +12,4 @@ const dateEnd = (paragraphs) => {
   });
 };
 
-export default dateEnd;
+export default dateStart;

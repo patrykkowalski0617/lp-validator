@@ -16,7 +16,7 @@ const fillInput = ({
     inp.value = value;
     forceChangeEvent(inpSelector);
   } else {
-    console.warn(`${inpSelector} not found`);
+    console.warn(`"${inpSelector}" not found`);
   }
 };
 

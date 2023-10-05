@@ -1,4 +1,4 @@
-import { dataPicker } from "../_helpers";
+import { dataPicker } from "../../_helpers";
 
 const mechanic = (paragraphs) => {
   const keyText = ["mechanika**:", "mechanika:"];

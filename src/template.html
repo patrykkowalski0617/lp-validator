@@ -6,148 +6,20 @@
     <title>test html</title>
     <link rel="icon" href="favicon.png" />
     <script defer="" src="content.js"></script>
-    <style>
-      .lp-validator-info {
-        padding: 5px 15px;
-        background-color: #4f4f4f !important;
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        z-index: 9;
-        min-height: 30px;
-        max-width: 700px;
-        max-height: 200px;
-        border-radius: 15px;
-        margin: 15px 0;
-      }
-      .lp-validator-info .lp-validator-proof {
-        background-color: inherit !important;
-        margin: 0;
-        max-width: calc(100% - 30px);
-        cursor: pointer;
-      }
-      .lp-validator-info.lp-validator-skipped .lp-validator-proof {
-        color: #797979 !important;
-      }
-      .lp-validator-info:not(.lp-validator-skipped) {
-        box-shadow: 0px 0px 20px 2px #00ff00;
-        color: inherit !important;
-      }
-      .lp-validator-info:not(.lp-validator-skipped) .lp-validator-skip {
-        font-size: 0;
-      }
-      .lp-validator-info:not(.lp-validator-skipped) .lp-validator-skip::before {
-        content: "skip";
-        font-size: 10px;
-      }
-
-      body.lp-validator-body-flesh {
-        animation: body-flash 0.5s;
-      }
-
-      .lp-validator-copied {
-        outline: 2px solid #00ffff;
-      }
-
-      .lp-validator-warn:not(.lp-validator-skipped) {
-        box-shadow: 0px 0px 20px 5px #ffff00 !important;
-      }
-
-      .lp-validator-error:not(.lp-validator-skipped) {
-        box-shadow: 0px 0px 30px 5px #ff0000 !important;
-      }
-
-      .lp-validator-compatible:not(.lp-validator-skipped) {
-        box-shadow: 0px 0px 20px 2px #0000ff !important;
-      }
-
-      .lp-validator-skip {
-        text-transform: uppercase;
-        font-weight: 300;
-        border: 3px #4f4f4f solid;
-        font-size: 10px;
-        margin: -5px -15px;
-        max-height: 50px;
-        width: 44px;
-        border-radius: 15px;
-      }
-
-      @keyframes body-flash {
-        from {
-          opacity: 0;
-          background: #6e6e6e;
-        }
-        to {
-          opacity: 1;
-          background: #000;
-        }
-      }
-      /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9tYWluLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBQTtFQUNBLG9DQUFBO0VBQ0EsYUFBQTtFQUNBLDhCQUFBO0VBQ0Esa0JBQUE7RUFDQSxVQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsbUJBQUE7RUFDQSxjQUFBO0FBQ0Y7QUFBRTtFQUNFLG9DQUFBO0VBQ0EsU0FBQTtFQUNBLDRCQUFBO0VBQ0EsZUFBQTtBQUVKO0FBQUU7RUFDRSx5QkFBQTtBQUVKO0FBQUU7RUFDRSxvQ0FBQTtFQUNBLHlCQUFBO0FBRUo7QUFESTtFQUNFLFlBQUE7QUFHTjtBQUZNO0VBQ0UsZUFBQTtFQUNBLGVBQUE7QUFJUjs7QUFFQTtFQUNFLDBCQUFBO0FBQ0Y7O0FBQ0E7RUFDRSwwQkFBQTtBQUVGOztBQUFBO0VBQ0UsK0NBQUE7QUFHRjs7QUFEQTtFQUNFLCtDQUFBO0FBSUY7O0FBRkE7RUFDRSwrQ0FBQTtBQUtGOztBQUZBO0VBQ0UseUJBQUE7RUFDQSxnQkFBQTtFQUNBLHlCQUFBO0VBQ0EsZUFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7QUFLRjs7QUFIQTtFQUNFO0lBQ0UsVUFBQTtJQUNBLG1CQUFBO0VBTUY7RUFKQTtJQUNFLFVBQUE7SUFDQSxnQkFBQTtFQU1GO0FBQ0YiLCJzb3VyY2VzQ29udGVudCI6WyIubHAtdmFsaWRhdG9yLWluZm8ge1xyXG4gIHBhZGRpbmc6IDVweCAxNXB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICM0ZjRmNGYgIWltcG9ydGFudDtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgei1pbmRleDogOTtcclxuICBtaW4taGVpZ2h0OiAzMHB4O1xyXG4gIG1heC13aWR0aDogNzAwcHg7XHJcbiAgbWF4LWhlaWdodDogMjAwcHg7XHJcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcclxuICBtYXJnaW46IDE1cHggMDtcclxuICAubHAtdmFsaWRhdG9yLXByb29mIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGluaGVyaXQgIWltcG9ydGFudDtcclxuICAgIG1hcmdpbjogMDtcclxuICAgIG1heC13aWR0aDogY2FsYygxMDAlIC0gMzBweCk7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgfVxyXG4gICYubHAtdmFsaWRhdG9yLXNraXBwZWQgLmxwLXZhbGlkYXRvci1wcm9vZiB7XHJcbiAgICBjb2xvcjogIzc5Nzk3OSAhaW1wb3J0YW50O1xyXG4gIH1cclxuICAmOm5vdCgubHAtdmFsaWRhdG9yLXNraXBwZWQpIHtcclxuICAgIGJveC1zaGFkb3c6IDBweCAwcHggMjBweCAycHggIzAwZmYwMDtcclxuICAgIGNvbG9yOiBpbmhlcml0ICFpbXBvcnRhbnQ7XHJcbiAgICAubHAtdmFsaWRhdG9yLXNraXAge1xyXG4gICAgICBmb250LXNpemU6IDA7XHJcbiAgICAgICY6OmJlZm9yZSB7XHJcbiAgICAgICAgY29udGVudDogXCJza2lwXCI7XHJcbiAgICAgICAgZm9udC1zaXplOiAxMHB4O1xyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG5ib2R5LmxwLXZhbGlkYXRvci1ib2R5LWZsZXNoIHtcclxuICBhbmltYXRpb246IGJvZHktZmxhc2ggMC41cztcclxufVxyXG4ubHAtdmFsaWRhdG9yLWNvcGllZCB7XHJcbiAgb3V0bGluZTogMnB4IHNvbGlkICMwMGZmZmY7XHJcbn1cclxuLmxwLXZhbGlkYXRvci13YXJuOm5vdCgubHAtdmFsaWRhdG9yLXNraXBwZWQpIHtcclxuICBib3gtc2hhZG93OiAwcHggMHB4IDIwcHggNXB4ICNmZmZmMDAgIWltcG9ydGFudDtcclxufVxyXG4ubHAtdmFsaWRhdG9yLWVycm9yOm5vdCgubHAtdmFsaWRhdG9yLXNraXBwZWQpIHtcclxuICBib3gtc2hhZG93OiAwcHggMHB4IDMwcHggNXB4ICNmZjAwMDAgIWltcG9ydGFudDtcclxufVxyXG4ubHAtdmFsaWRhdG9yLWNvbXBhdGlibGU6bm90KC5scC12YWxpZGF0b3Itc2tpcHBlZCkge1xyXG4gIGJveC1zaGFkb3c6IDBweCAwcHggMjBweCAycHggIzAwMDBmZiAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4ubHAtdmFsaWRhdG9yLXNraXAge1xyXG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XHJcbiAgZm9udC13ZWlnaHQ6IDMwMDtcclxuICBib3JkZXI6IDNweCAjNGY0ZjRmIHNvbGlkO1xyXG4gIGZvbnQtc2l6ZTogMTBweDtcclxuICBtYXJnaW46IC01cHggLTE1cHg7XHJcbiAgbWF4LWhlaWdodDogNTBweDtcclxuICB3aWR0aDogNDRweDtcclxuICBib3JkZXItcmFkaXVzOiAxNXB4O1xyXG59XHJcbkBrZXlmcmFtZXMgYm9keS1mbGFzaCB7XHJcbiAgZnJvbSB7XHJcbiAgICBvcGFjaXR5OiAwO1xyXG4gICAgYmFja2dyb3VuZDogIzZlNmU2ZTtcclxuICB9XHJcbiAgdG8ge1xyXG4gICAgb3BhY2l0eTogMTtcclxuICAgIGJhY2tncm91bmQ6ICMwMDA7XHJcbiAgfVxyXG59XHJcbiJdLCJzb3VyY2VSb290IjoiIn0= */
-    </style>
   </head>
   <body>
     <script>
-      const data_old = `||0||dateStart||1||data||2||05102023||0||dateStart||1||proof||2||Data Od: 05.10.2023||BRK-LVL0||||0||dateEnd||1||data||2||05102023||0||dateEnd||1||proof||2||Data Do: 05.10.2023||BRK-LVL0||||0||url||1||data||2||https://www.neonet.pl/lpage/ale-akcja.html||0||url||1||proof||2||URL: Ale akcja!||BRK-LVL0||||0||title||1||data||2||Ale akcja!||0||title||1||proof||2||Tytuł: Ale akcja!||BRK-LVL0||||0||mechanic||1||data||2||amount||0||mechanic||1||proof||2||Jak mechanika: rabat z kodem AKCJA lub AKCJA1||BRK-LVL0||||0||code||1||data||2||AKCJA,AKCJA1||0||code||1||proof||2||Jak mechanika: rabat z kodem AKCJA lub AKCJA1||BRK-LVL0||||0||hexColor||1||data||2||||0||hexColor||1||proof||2||Kolory hex: 300cd30||BRK-LVL0||||0||terms||1||data||2||<p>Promocja obowiązuje w okresie od <strong data-renderer-mark="true">05.10.2023r. od godz. 00:01 do 05.10.2023r. do godz. 23:59</strong> lub do wyczerpania zapasów dla produktów oznaczonych "<strong data-renderer-mark="true">Rabat XXX zł z kodem: xxx</strong>" gdzie, dla uzyskania promocyjnej ceny należy w zamówieniu wpisać odpowiedni kod.</p>||0||terms||1||proof||2||Promocja obowiązuje w okresie od 05.10.2023r. od godz. 00:01 do 05.10.2023r. do godz. 23:59 lub do wyczerpania zapasów dla produktów oznaczonych "Rabat XXX zł z kodem: xxx" gdzie, dla uzyskania promocyjnej ceny należy w zamówieniu wpisać odpowiedni kod.||BRK-LVL0||||0||teaser||1||data||2||false||0||teaser||1||proof||2||Czy teaser: nie||BRK-LVL0||||0||steps||1||data||2||Dodaj do koszyka produkt objęty promocją>ARR-BR<Rabat zostanie naliczony w koszyku po wpisaniu odpowiedniego kodu>ARR-BR<Dokończ zamówienie i ciesz się tańszymi zakupami||0||steps||1||proof||2||Kroki: 1. Dodaj do koszyka produkt objęty promocją2. Rabat zostanie naliczony w koszyku po wpisaniu odpowiedniego kodu3. Dokończ zamówienie i ciesz się tańszymi zakupami||BRK-LVL0||`;
-      const data = `||0||dateStart||1||data||2||05102023||0||dateStart||1||proof||2||Data Od: 05.10.2023||BRK-LVL0||||0||dateEnd||1||data||2||05102023||0||dateEnd||1||proof||2||Data Do: 05.10.2023||BRK-LVL0||||0||url||1||data||2||https://www.neonet.pl/lpage/ale-akcja.html||0||url||1||proof||2||URL: Ale akcja!||BRK-LVL0||||0||title||1||data||2||Ale akcja!||0||title||1||proof||2||Tytuł: Ale akcja!||BRK-LVL0||||0||mechanic||1||data||2||amount||0||mechanic||1||proof||2||Jak mechanika: rabat z kodem AKCJA lub AKCJA1||BRK-LVL0||||0||code||1||data||2||AKCJA,AKCJA1||0||code||1||proof||2||Jak mechanika: rabat z kodem AKCJA lub AKCJA1||BRK-LVL0||||0||hexColor||1||data||2||||0||hexColor||1||proof||2||Kolory hex: 300cd30||BRK-LVL0||||0||terms||1||data||2||<p>Promocja obowiązuje w okresie od <strong data-renderer-mark="true">05.10.2023r. od godz. 00:01 do 05.10.2023r. do godz. 23:59</strong> lub do wyczerpania zapasów dla produktów oznaczonych "<strong data-renderer-mark="true">Rabat XXX zł z kodem: xxx</strong>" gdzie, dla uzyskania promocyjnej ceny należy w zamówieniu wpisać odpowiedni kod.</p>||0||terms||1||proof||2||Promocja obowiązuje w okresie od 05.10.2023r. od godz. 00:01 do 05.10.2023r. do godz. 23:59 lub do wyczerpania zapasów dla produktów oznaczonych "Rabat XXX zł z kodem: xxx" gdzie, dla uzyskania promocyjnej ceny należy w zamówieniu wpisać odpowiedni kod.||BRK-LVL0||||0||teaser||1||data||2||false||0||teaser||1||proof||2||Czy teaser: nie||BRK-LVL0||||0||steps||1||data||2||Dodaj do koszyka produkt objęty promocją>ARR-BR<Rabat zostanie naliczony w koszyku po wpisaniu odpowiedniego kodu>ARR-BR<Dokończ zamówienie i ciesz się tańszymi zakupami||0||steps||1||proof||2||Kroki: 1. Dodaj do koszyka produkt objęty promocją2. Rabat zostanie naliczony w koszyku po wpisaniu odpowiedniego kodu3. Dokończ zamówienie i ciesz się tańszymi zakupami||BRK-LVL0||`;
-      const customJSON = {
-        stringify: (data) => {
-          let string = "";
-          for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-              const keyLvl2 = key;
-              const dataLvl2 = data[key];
-              for (const key in dataLvl2) {
-                const element = Array.isArray(dataLvl2[key])
-                  ? dataLvl2[key].join(">ARR-BR<")
-                  : dataLvl2[key];
+      const fn1 = () => false;
 
-                string += `||0||${keyLvl2}||1||${key}||2||${element}`;
-              }
-              string += `||BRK-LVL0||`;
-            }
-          }
-          navigator.clipboard.writeText(string);
-          return string;
-        },
-        parse: (data) => {
-          const expectedAmountOfKeysInEachObjectOnLevel2 = 4;
-          const object = {};
+      const fn2 = () => false;
 
-          const dataLvl0 = data.split("||BRK-LVL0||").filter((el) => el.length);
-          dataLvl0.forEach((element) => {
-            const dataLvl1 = element.split("||0||").filter((el) => el.length);
-
-            dataLvl1.forEach((el, i) => {
-              if (!(i % expectedAmountOfKeysInEachObjectOnLevel2)) {
-                object[el.split("||1||")[0]] = {};
-              }
-
-              const keyLvl1 = el.split("||1||")[0];
-              const keyLvl2 = el.split("||1||")[1].split("||2||")[0];
-              const valLvl2 = el.split("||1||")[1].split("||2||")[1];
-              const correctType = (value) => {
-                console.log(value);
-                let _undefined;
-                return value === "true"
-                  ? true
-                  : value === "false"
-                  ? false
-                  : value === "null"
-                  ? null
-                  : value.includes(">ARR-BR<")
-                  ? value.split(">ARR-BR<")
-                  : value === "undefined"
-                  ? _undefined
-                  : value;
-              };
-              object[keyLvl1][keyLvl2] = correctType(valLvl2);
-            });
-          });
-          return object;
-        },
+      const fn3 = () => {
+        console.log("fn3");
       };
 
-      console.log("customJSON.parse(data)", customJSON.parse(data));
+      fn1();
+      fn2();
+      fn3();
     </script>
   </body>
 </html>

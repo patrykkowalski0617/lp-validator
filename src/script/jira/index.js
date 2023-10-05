@@ -1,14 +1,16 @@
 import { bodyFlesh, customJSON } from "../_helpers";
-import dateStart from "./dateStart/dateStart";
-import dateEnd from "./dateEnd/dateEnd";
-import url from "./url/url";
-import title from "./title/title";
-import mechanic from "./mechanic/mechanic";
-import code from "./code/code";
-import hexColor from "./hexColor/hexColor";
-import terms from "./terms/terms";
-import teaser from "./teaser/teaser";
-import steps from "./steps/steps";
+import {
+  dateStart,
+  dateEnd,
+  url,
+  title,
+  mechanic,
+  code,
+  hexColor,
+  terms,
+  teaser,
+  steps,
+} from "./dataPickers";
 
 const jira = (jiraBody) => {
   const taskData = {};

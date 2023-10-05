@@ -1,4 +1,4 @@
-import { dataPicker } from "../_helpers";
+import { dataPicker } from "../../_helpers";
 
 const hexColor = (paragraphs) => {
   const keyText = ["hex", "kolor"];
