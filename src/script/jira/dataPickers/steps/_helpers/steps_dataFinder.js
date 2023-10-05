@@ -35,12 +35,6 @@ const steps_dataFinder = (taskContentContainers) => {
 
         return isTxtInludesOneOfKeyWordsGroup(keyWordsGroups);
       };
-      console.log(
-        textContent,
-        lengthCondition(textContent),
-        numOfListItemCondition(taskDataContainer),
-        keyWordsCondition(textContent)
-      );
       return (
         lengthCondition(textContent) &&
         numOfListItemCondition(taskDataContainer) &&
