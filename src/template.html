@@ -4,8 +4,332 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>test html</title>
+    <link rel="icon" href="favicon.png" />
+    <script defer="" src="content.js"></script>
+    <style>
+      .lp-validator-info {
+        padding: 5px 15px;
+        background-color: #4f4f4f !important;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 9;
+        min-height: 30px;
+        max-width: 700px;
+        max-height: 200px;
+        border-radius: 15px;
+        margin: 15px 0;
+      }
+      .lp-validator-info .lp-validator-proof {
+        background-color: inherit !important;
+        margin: 0;
+        max-width: calc(100% - 30px);
+        cursor: pointer;
+      }
+      .lp-validator-info.lp-validator-skipped .lp-validator-proof {
+        color: #797979 !important;
+      }
+      .lp-validator-info:not(.lp-validator-skipped) {
+        box-shadow: 0px 0px 20px 2px #00ff00;
+        color: inherit !important;
+      }
+      .lp-validator-info:not(.lp-validator-skipped) .lp-validator-skip {
+        font-size: 0;
+      }
+      .lp-validator-info:not(.lp-validator-skipped) .lp-validator-skip::before {
+        content: "skip";
+        font-size: 10px;
+      }
+
+      body.lp-validator-body-flesh {
+        animation: body-flash 0.5s;
+      }
+
+      .lp-validator-copied {
+        outline: 2px solid #00ffff;
+      }
+
+      .lp-validator-warn:not(.lp-validator-skipped) {
+        box-shadow: 0px 0px 20px 5px #ffff00 !important;
+      }
+
+      .lp-validator-error:not(.lp-validator-skipped) {
+        box-shadow: 0px 0px 30px 5px #ff0000 !important;
+      }
+
+      .lp-validator-compatible:not(.lp-validator-skipped) {
+        box-shadow: 0px 0px 20px 2px #0000ff !important;
+      }
+
+      .lp-validator-skip {
+        text-transform: uppercase;
+        font-weight: 300;
+        border: 3px #4f4f4f solid;
+        font-size: 10px;
+        margin: -5px -15px;
+        max-height: 50px;
+        width: 44px;
+        border-radius: 15px;
+      }
+
+      @keyframes body-flash {
+        from {
+          opacity: 0;
+          background: #6e6e6e;
+        }
+        to {
+          opacity: 1;
+          background: #000;
+        }
+      }
+      /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9tYWluLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBQTtFQUNBLG9DQUFBO0VBQ0EsYUFBQTtFQUNBLDhCQUFBO0VBQ0Esa0JBQUE7RUFDQSxVQUFBO0VBQ0EsZ0JBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0VBQ0EsbUJBQUE7RUFDQSxjQUFBO0FBQ0Y7QUFBRTtFQUNFLG9DQUFBO0VBQ0EsU0FBQTtFQUNBLDRCQUFBO0VBQ0EsZUFBQTtBQUVKO0FBQUU7RUFDRSx5QkFBQTtBQUVKO0FBQUU7RUFDRSxvQ0FBQTtFQUNBLHlCQUFBO0FBRUo7QUFESTtFQUNFLFlBQUE7QUFHTjtBQUZNO0VBQ0UsZUFBQTtFQUNBLGVBQUE7QUFJUjs7QUFFQTtFQUNFLDBCQUFBO0FBQ0Y7O0FBQ0E7RUFDRSwwQkFBQTtBQUVGOztBQUFBO0VBQ0UsK0NBQUE7QUFHRjs7QUFEQTtFQUNFLCtDQUFBO0FBSUY7O0FBRkE7RUFDRSwrQ0FBQTtBQUtGOztBQUZBO0VBQ0UseUJBQUE7RUFDQSxnQkFBQTtFQUNBLHlCQUFBO0VBQ0EsZUFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7QUFLRjs7QUFIQTtFQUNFO0lBQ0UsVUFBQTtJQUNBLG1CQUFBO0VBTUY7RUFKQTtJQUNFLFVBQUE7SUFDQSxnQkFBQTtFQU1GO0FBQ0YiLCJzb3VyY2VzQ29udGVudCI6WyIubHAtdmFsaWRhdG9yLWluZm8ge1xyXG4gIHBhZGRpbmc6IDVweCAxNXB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICM0ZjRmNGYgIWltcG9ydGFudDtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgei1pbmRleDogOTtcclxuICBtaW4taGVpZ2h0OiAzMHB4O1xyXG4gIG1heC13aWR0aDogNzAwcHg7XHJcbiAgbWF4LWhlaWdodDogMjAwcHg7XHJcbiAgYm9yZGVyLXJhZGl1czogMTVweDtcclxuICBtYXJnaW46IDE1cHggMDtcclxuICAubHAtdmFsaWRhdG9yLXByb29mIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGluaGVyaXQgIWltcG9ydGFudDtcclxuICAgIG1hcmdpbjogMDtcclxuICAgIG1heC13aWR0aDogY2FsYygxMDAlIC0gMzBweCk7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgfVxyXG4gICYubHAtdmFsaWRhdG9yLXNraXBwZWQgLmxwLXZhbGlkYXRvci1wcm9vZiB7XHJcbiAgICBjb2xvcjogIzc5Nzk3OSAhaW1wb3J0YW50O1xyXG4gIH1cclxuICAmOm5vdCgubHAtdmFsaWRhdG9yLXNraXBwZWQpIHtcclxuICAgIGJveC1zaGFkb3c6IDBweCAwcHggMjBweCAycHggIzAwZmYwMDtcclxuICAgIGNvbG9yOiBpbmhlcml0ICFpbXBvcnRhbnQ7XHJcbiAgICAubHAtdmFsaWRhdG9yLXNraXAge1xyXG4gICAgICBmb250LXNpemU6IDA7XHJcbiAgICAgICY6OmJlZm9yZSB7XHJcbiAgICAgICAgY29udGVudDogXCJza2lwXCI7XHJcbiAgICAgICAgZm9udC1zaXplOiAxMHB4O1xyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG5ib2R5LmxwLXZhbGlkYXRvci1ib2R5LWZsZXNoIHtcclxuICBhbmltYXRpb246IGJvZHktZmxhc2ggMC41cztcclxufVxyXG4ubHAtdmFsaWRhdG9yLWNvcGllZCB7XHJcbiAgb3V0bGluZTogMnB4IHNvbGlkICMwMGZmZmY7XHJcbn1cclxuLmxwLXZhbGlkYXRvci13YXJuOm5vdCgubHAtdmFsaWRhdG9yLXNraXBwZWQpIHtcclxuICBib3gtc2hhZG93OiAwcHggMHB4IDIwcHggNXB4ICNmZmZmMDAgIWltcG9ydGFudDtcclxufVxyXG4ubHAtdmFsaWRhdG9yLWVycm9yOm5vdCgubHAtdmFsaWRhdG9yLXNraXBwZWQpIHtcclxuICBib3gtc2hhZG93OiAwcHggMHB4IDMwcHggNXB4ICNmZjAwMDAgIWltcG9ydGFudDtcclxufVxyXG4ubHAtdmFsaWRhdG9yLWNvbXBhdGlibGU6bm90KC5scC12YWxpZGF0b3Itc2tpcHBlZCkge1xyXG4gIGJveC1zaGFkb3c6IDBweCAwcHggMjBweCAycHggIzAwMDBmZiAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4ubHAtdmFsaWRhdG9yLXNraXAge1xyXG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7XHJcbiAgZm9udC13ZWlnaHQ6IDMwMDtcclxuICBib3JkZXI6IDNweCAjNGY0ZjRmIHNvbGlkO1xyXG4gIGZvbnQtc2l6ZTogMTBweDtcclxuICBtYXJnaW46IC01cHggLTE1cHg7XHJcbiAgbWF4LWhlaWdodDogNTBweDtcclxuICB3aWR0aDogNDRweDtcclxuICBib3JkZXItcmFkaXVzOiAxNXB4O1xyXG59XHJcbkBrZXlmcmFtZXMgYm9keS1mbGFzaCB7XHJcbiAgZnJvbSB7XHJcbiAgICBvcGFjaXR5OiAwO1xyXG4gICAgYmFja2dyb3VuZDogIzZlNmU2ZTtcclxuICB9XHJcbiAgdG8ge1xyXG4gICAgb3BhY2l0eTogMTtcclxuICAgIGJhY2tncm91bmQ6ICMwMDA7XHJcbiAgfVxyXG59XHJcbiJdLCJzb3VyY2VSb290IjoiIn0= */
+    </style>
   </head>
   <body>
+    <style>
+      .mark {
+        outline: 3px blue solid;
+      }
+    </style>
     <script src="/dist/content.js"></script>
+
+    <div class="ex">
+      <div class="ak-renderer-document">
+        <ol class="ak-ol" data-indent-level="1">
+          <li><p data-renderer-start-pos="265">Kolory hex: #00cd30</p></li>
+          <li>
+            <p data-renderer-start-pos="288">
+              Kroki:<br />1. Wybierz produkt objęty promocji<br />2. Aby
+              skorzystać z promocji wpisz odpowiedni kod rabatowy<br />3.
+              Dokończ zamówienie i ciesz się tańszym zakupem<br /><br />
+            </p>
+          </li>
+          <li><p data-renderer-start-pos="443">Regulamin: w załączniku</p></li>
+          <li>
+            <p data-renderer-start-pos="470">
+              Tekst do regulaminu:<br />Promocja obowiązuje w okresie od
+              <strong data-renderer-mark="true"
+                >28.09.2023r. od godz. 00:01 do 05.10.2023r. do godz.
+                23:59</strong
+              >
+              lub do wyczerpania zapasów dla produktów oznaczonych "<strong
+                data-renderer-mark="true"
+                >Rabat XXX zł z kodem: xxx</strong
+              >" gdzie, dla uzyskania promocyjnej ceny należy w zamówieniu
+              wpisać odpowiedni kod.
+            </p>
+          </li>
+
+          <p data-renderer-start-pos="431">
+            11.&nbsp;&nbsp; Regulamin: załącznik
+          </p>
+          <p data-renderer-start-pos="470">11. Regulamin: załącznik</p>
+        </ol>
+
+        <p data-renderer-start-pos="997">&nbsp;</p>
+      </div>
+      <div class="ak-renderer-document">
+        <p>some comment 1</p>
+      </div>
+    </div>
+
+    <div class="ex">
+      <div class="ak-renderer-document" style="border-top: 3px red solid">
+        <ol class="ak-ol" data-indent-level="1">
+          <li>
+            <p data-renderer-start-pos="3">Tytuł: Wyprzedaż ekspozycji</p>
+          </li>
+        </ol>
+        <p data-renderer-start-pos="270">10.&nbsp;&nbsp; Kroki:</p>
+        <ul class="ak-ul" data-indent-level="1">
+          <li>
+            <p data-renderer-start-pos="286">
+              1. Przyjdź do jednego z naszych sklepów stacjonarnych
+            </p>
+          </li>
+          <li>
+            <p data-renderer-start-pos="343">
+              2. Wybierz produkty z ekspozycji, które chcesz kupić
+            </p>
+          </li>
+          <li>
+            <p data-renderer-start-pos="399">3. Zyskaj nawet 10% rabatu!</p>
+          </li>
+        </ul>
+        <p data-renderer-start-pos="431">
+          11.&nbsp;&nbsp; Regulamin: załącznik
+        </p>
+      </div>
+      <div class="ak-renderer-document">
+        <p>some comment 2</p>
+      </div>
+    </div>
+
+    <div class="ex">
+      <div class="ak-renderer-document" style="border-top: 3px red solid">
+        <ol class="ak-ol" data-indent-level="1">
+          <li>
+            <p data-renderer-start-pos="3">Tytuł*: Premiera Xiaomi 13T</p>
+          </li>
+
+          <li>
+            <p data-renderer-start-pos="253">Kroki***:</p>
+            <ol class="ak-ol" data-indent-level="2">
+              <li>
+                <p data-renderer-start-pos="266">
+                  zakup Urządzenie w terminie od 26.09.2023 do 08.10.2023 r.
+                </p>
+              </li>
+              <li>
+                <p data-renderer-start-pos="329">
+                  zarejestruj Urządzenie w formularzu rejestracyjnym na stronie
+                  <a
+                    data-testid="link-with-safety"
+                    href="http://www.promocjexiaomi.pl/premieraserii13T"
+                    title="http://www.promocjexiaomi.pl/premieraserii13T"
+                    data-renderer-mark="true"
+                    class="css-tgpl01"
+                    >www.promocjexiaomi.pl/premieraserii13T</a
+                  >
+                  (nie klikane) w terminie od 26.09.2023 do 08.10.2023 r. Za
+                  datę zakupu Urządzenia uważa się datę widniejącą na dowodzie
+                  zakupu Urządzenia (fakturze lub paragonie).
+                </p>
+              </li>
+              <li>
+                <p data-renderer-start-pos="597">
+                  Odbierz dedykowany prezent. Sprawdź w regulaminie
+                </p>
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <p data-renderer-start-pos="653">
+          10.&nbsp;&nbsp; Regulamin: w załączniku
+        </p>
+      </div>
+      <div class="ak-renderer-document">
+        <p>some comment 3</p>
+      </div>
+    </div>
+
+    <div class="ex">
+      <div class="ak-renderer-document" style="border-top: 3px red solid">
+        <p data-renderer-start-pos="1">
+          Proszę o przygotowanie LP do promocji Wyprzedaż AGD. Promocja
+          obowiązuje tylko w sklepach stacjonarnych
+        </p>
+        <ol class="ak-ol" data-indent-level="1">
+          <li>
+            <p data-renderer-start-pos="109">
+              Tytuł: Wyprzedaż ekspozycji dużego i małego AGD
+            </p>
+          </li>
+        </ol>
+        <p data-renderer-start-pos="386">10.&nbsp;&nbsp; Kroki:</p>
+        <ul class="ak-ul" data-indent-level="1">
+          <li>
+            <p data-renderer-start-pos="402">
+              1. Przyjdź do jednego z naszych sklepów stacjonarnych
+            </p>
+          </li>
+          <li>
+            <p data-renderer-start-pos="459">
+              2. Wybierz produkty dużego lub małego AGD z ekspozycji, które
+              chcesz kupić
+            </p>
+          </li>
+          <li>
+            <p data-renderer-start-pos="537">3. Zyskaj nawet 10% rabatu!</p>
+          </li>
+        </ul>
+        <p data-renderer-start-pos="569">
+          11.&nbsp;&nbsp; Regulamin: załącznik
+        </p>
+      </div>
+      <div class="ak-renderer-document">
+        <p>some comment 4</p>
+      </div>
+    </div>
+
+    <script>
+      const findSteps = (taskContentContainers) => {
+        const htmlWithSteps = taskContentContainers.find(
+          (taskDataContainer) => {
+            const textContent = taskDataContainer.textContent;
+
+            const lengthCondition = (textContent) => {
+              const length = textContent.length;
+              const minStepsLength = 150;
+              const maxStepsLength = 1000;
+              return length < maxStepsLength && length > minStepsLength;
+            };
+            const numOfListItemCondition = (taskDataContainer) => {
+              const maxNumOfListItem = 3;
+              const minNumOfListItem = 2;
+              const nodeName = taskDataContainer.nodeName;
+              const isListNode = nodeName === "UL" || nodeName === "OL";
+              return (
+                (isListNode &&
+                  taskDataContainer.querySelectorAll("li").length <=
+                    maxNumOfListItem) ||
+                nodeName === "P"
+              );
+            };
+            const keyWordsCondition = (textContent) => {
+              const keyWordsGroups = [
+                ["wybier", "dokończ"],
+                ["przyjdź", "wybier"],
+                ["zakup", "odbierz"],
+              ];
+              const keyWordsGroup = ["wybier", "dokończ"];
+              const txt = textContent.toLowerCase();
+              const isTxtInludesKeyWordsGroup = (keyWordsGroup) =>
+                keyWordsGroup.every((currentValue) =>
+                  txt.includes(currentValue)
+                );
+              const isTxtInludesOneOfKeyWordsGroup = (keyWordsGroups) =>
+                keyWordsGroups.some(isTxtInludesKeyWordsGroup);
+
+              return isTxtInludesOneOfKeyWordsGroup(keyWordsGroups);
+            };
+
+            return (
+              lengthCondition(textContent) &&
+              numOfListItemCondition(taskDataContainer) &&
+              keyWordsCondition(textContent)
+            );
+          }
+        );
+        return htmlWithSteps;
+      };
+
+      const tasks = document.querySelectorAll(".ex");
+      const eachTaskFn = (task) => {
+        const taskContentContainers = Array.from(
+          task.querySelectorAll(
+            ".ak-renderer-document ul, .ak-renderer-document ol, .ak-renderer-document p"
+          )
+        );
+        console.log("taskContentContainers", taskContentContainers);
+        const stepsExtractData = (taskContentContainers) => {
+          const proof = findSteps(taskContentContainers).textContent;
+          const data = proof
+            .replace(/(\r\n|\n|\r)/gm, "")
+            .replace(/\s+/g, " ")
+            .split(/[0-9]*\. /)
+            .filter((step) => step.length > 20)
+            .map((step) => step.trim());
+          return { data, proof };
+        };
+
+        const data = stepsExtractData(taskContentContainers);
+        console.log("data", data.data);
+      };
+      tasks.forEach((task, i) => {
+        console.log("TASK " + i + "================>");
+        eachTaskFn(task);
+      });
+    </script>
   </body>
 </html>

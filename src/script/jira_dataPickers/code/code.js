@@ -2,7 +2,7 @@ import { dataPicker } from "../_helpers";
 
 const code = (paragraphs) => {
   const keyText = ["mechanika**:", "mechanika:"];
-  const findDataFn = ({ proof }) => {
+  const extractData = ({ proof }) => {
     const take1 = proof
       .split(" ")
       .filter((x) => isNaN(x))
@@ -32,7 +32,7 @@ const code = (paragraphs) => {
   return dataPicker({
     paragraphs,
     keyText,
-    findDataFn,
+    extractData,
   });
 };
 

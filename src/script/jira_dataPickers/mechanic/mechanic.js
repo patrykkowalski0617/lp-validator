@@ -2,7 +2,7 @@ import { dataPicker } from "../_helpers";
 
 const mechanic = (paragraphs) => {
   const keyText = ["mechanika**:", "mechanika:"];
-  const findDataFn = ({ proof }) => {
+  const extractData = ({ proof }) => {
     const XY = proof.includes("ZA");
     const amount =
       proof.toLowerCase().includes("kwoto") ||
@@ -27,7 +27,7 @@ const mechanic = (paragraphs) => {
   return dataPicker({
     paragraphs,
     keyText,
-    findDataFn,
+    extractData,
   });
 };
 

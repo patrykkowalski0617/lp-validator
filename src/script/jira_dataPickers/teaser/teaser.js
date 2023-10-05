@@ -2,7 +2,7 @@ import { dataPicker } from "../_helpers";
 
 const teaser = (paragraphs) => {
   const keyText = ["teaser"];
-  const findDataFn = ({ proof }) => {
+  const extractData = ({ proof }) => {
     const start = proof.indexOf(":");
     const data = proof.substring(start).includes("tak");
     return data;
@@ -11,7 +11,7 @@ const teaser = (paragraphs) => {
   return dataPicker({
     paragraphs,
     keyText,
-    findDataFn,
+    extractData,
   });
 };
 
