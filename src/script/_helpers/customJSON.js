@@ -6,7 +6,9 @@ const customJSON = {
         const keyLvl2 = key;
         const dataLvl2 = data[key];
         for (const key in dataLvl2) {
-          const element = dataLvl2[key];
+          const element = Array.isArray(dataLvl2[key])
+            ? dataLvl2[key].join(">ARR-BR<")
+            : dataLvl2[key];
 
           string += `||0||${keyLvl2}||1||${key}||2||${element}`;
         }
@@ -40,6 +42,8 @@ const customJSON = {
             ? false
             : value === "null"
             ? null
+            : value.includes(">ARR-BR<")
+            ? value.split(">ARR-BR<")
             : value === "undefined"
             ? _undefined
             : value;
