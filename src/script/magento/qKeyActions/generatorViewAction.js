@@ -7,35 +7,60 @@ import {
   dateStartFn,
   dateEndFn,
   teaserFn,
+  hexColorFn,
+  termsFn,
+  headerDatesFn,
 } from "../dataInjectors";
+import steps from "../dataInjectors/steps/steps";
 
 const generatorViewAction = () => {
-  console.clear();
   navigator.clipboard.readText().then((clitextLowerCase) => {
     const taskData = customJSON.parse(clitextLowerCase);
     const {
-      title,
-      url,
-      dateStart,
-      dateEnd,
-      teaser,
-      hex,
-      code,
-      mechanic,
-      terms,
+      title: taskTitle,
+      url: taskUrl,
+      dateStart: taskDateStart,
+      dateEnd: taskDateEnd,
+      teaser: taskTeaser,
+      hexColor: taskHexColor,
+      code: taskCode,
+      mechanic: taskMechanic,
+      terms: taskTerms,
+      steps: taskSteps,
     } = taskData;
+    console.clear();
     console.log("magento taskData", taskData);
 
-    titleFn(title);
-    urlFn(url);
-    teaserFn(teaser);
-    dateStartFn(dateStart, teaser);
-    dateEndFn(dateEnd);
-    codeFn(code);
-
+    titleFn(taskTitle);
+    urlFn(taskUrl);
+    teaserFn(taskTeaser);
+    dateStartFn(taskDateStart, taskTeaser);
+    dateEndFn(taskDateEnd);
+    codeFn(taskCode);
+    hexColorFn(taskHexColor);
+    termsFn(taskTerms);
+    headerDatesFn({
+      dateSource: taskDateStart,
+      actionType: "+",
+      numOfDays: 1,
+      inputSelector: "input#image-0_suffixPlaceholder",
+    });
+    headerDatesFn({
+      dateSource: taskDateEnd,
+      actionType: "-",
+      numOfDays: 2,
+      inputSelector: "input#image-1_suffixPlaceholder",
+    });
+    headerDatesFn({
+      dateSource: taskDateEnd,
+      actionType: "-",
+      numOfDays: 1,
+      inputSelector: "input#image-2_suffixPlaceholder",
+    });
+    steps(taskSteps);
     // mechanic
     const mechanicFn = () => {
-      if (mechanic) {
+      if (taskMechanic) {
         const inpXY = document.querySelector(
           "[id^=products_x_for_y_promo_], [id^=products_new_x_for_y_promo_]"
         );
@@ -45,7 +70,7 @@ const generatorViewAction = () => {
         const XYdiscountInp = document.querySelector(
           "[id^=products_x_for_y_promo_discount_], [id^=products_new_x_for_y_promo_discount_]"
         );
-        const { data, text } = mechanic;
+        const { data, text } = taskMechanic;
 
         if (inpXY) {
           switch (data) {
@@ -82,114 +107,28 @@ const generatorViewAction = () => {
     };
     mechanicFn();
 
-    // headers dates
-    const headersDates = () => {
-      if (dateStart && dateEnd) {
-        const h24 = 24 * 60 * 60 * 1000;
+    // // Default clicks
+    // const bannerHeroDefault = () => {
+    //   const btn = document.querySelectorAll(
+    //     ".module__banner_hero .chill-btn"
+    //   )[2];
+    //   if (btn) {
+    //     btn.click();
+    //   }
+    //   console.warn("btn is not found");
+    // };
+    // bannerHeroDefault();
 
-        const getDate = (inpSelector, source) => {
-          const inp = document.querySelector(inpSelector);
-          if (inp) {
-            const { data: sourceDate, text } = source;
-            const sourceDay = sourceDate.substring(0, 2);
-            const sourceMonth = sourceDate.substring(2, 4);
-            const sourceYear = sourceDate.substring(4);
-
-            const newDate = inpSelector.includes("0")
-              ? new Date(
-                  new Date(
-                    `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                  ).getTime() + h24
-                )
-              : inpSelector.includes("1")
-              ? new Date(
-                  new Date(
-                    `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                  ).getTime() - h24
-                )
-              : inpSelector.includes("2")
-              ? new Date(
-                  new Date(
-                    `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
-                  ).getTime()
-                )
-              : null;
-
-            const yyyy = String(newDate.getFullYear());
-            const mm = String(newDate.getMonth() + 1).padStart(2, "0");
-            const dd = String(newDate.getDate()).padStart(2, "0");
-            const date = `${yyyy}-${mm}-${dd}T00:00`;
-            inp.value = date;
-
-            renderProof({ container: inp, text });
-            forceChangeEvent(inp);
-          }
-        };
-        getDate("input#image-0_suffixPlaceholder", dateStart);
-        getDate("input#image-1_suffixPlaceholder", dateEnd);
-        getDate("input#image-2_suffixPlaceholder", dateEnd);
-      }
-    };
-    headersDates();
-    // hex
-    const hexFn = () => {
-      if (hex) {
-        const hexInps = document.querySelectorAll(
-          `.module__banner_hero .input__color__text,
-             .module__banner_hero .input__color`
-        );
-        const { data, text } = hex;
-        hexInps.forEach((el) => {
-          if (data.length) {
-            el.value = `#${data}`;
-
-            forceChangeEvent(el);
-          }
-          renderProof({ container: hexInps[0].parentElement, text });
-        });
-      }
-    };
-    hexFn();
-
-    // terms zawartość
-    const termsFn = () => {
-      const termsInp = document.querySelector(
-        "[id*=terms_and_condition_content_]"
-      );
-      if (terms && termsInp) {
-        termsInp.value = terms.data;
-
-        renderProof({
-          container: termsInp,
-          text: terms.text,
-        });
-        forceChangeEvent("[id*=terms_and_condition_content_]");
-      }
-    };
-    termsFn();
-
-    // Default clicks
-    const bannerHeroDefault = () => {
-      const btn = document.querySelectorAll(
-        ".module__banner_hero .chill-btn"
-      )[2];
-      if (btn) {
-        btn.click();
-      }
-      console.warn("btn is not found");
-    };
-    bannerHeroDefault();
-
-    const listingDefault = () => {
-      const modules = document.querySelectorAll(
-        ".module__products, .module__products_new"
-      );
-      modules.forEach((module) => {
-        const btn = module.querySelectorAll(".chill-btn")[2];
-        btn.click();
-      });
-    };
-    listingDefault();
+    // const listingDefault = () => {
+    //   const modules = document.querySelectorAll(
+    //     ".module__products, .module__products_new"
+    //   );
+    //   modules.forEach((module) => {
+    //     const btn = module.querySelectorAll(".chill-btn")[2];
+    //     btn.click();
+    //   });
+    // };
+    // listingDefault();
 
     bodyFlesh();
   });

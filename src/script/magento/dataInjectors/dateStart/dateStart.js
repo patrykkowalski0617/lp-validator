@@ -1,27 +1,27 @@
-import { fillInput } from "../../_helpers";
+import { setInputValue } from "../../_helpers";
 
-const dateStart = (dateStart, teaser) => {
-  if (dateStart) {
-    const dateStartInp = document.querySelector("[name=date_from]");
-    const dateStr = {
-      day: dateStart.data.substring(0, 2),
-      month: dateStart.data.substring(2, 4),
-      year: dateStart.data.substring(4),
-    };
-    const date = new Date();
-    const taskStartDate = `${dateStr.day}/${dateStr.month}/${dateStr.year} 00:00`;
-    const todayDate = `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()} 00:00`;
-    const value = teaser.data === true ? taskStartDate : todayDate;
-    const starttext =
-      teaser.data === true
-        ? dateStart.text
-        : `Data dzisiejsza ponieważ: "${teaser.text}"`;
-    fillInput({
-      text: starttext,
+const dateStart = (taskDateStart, teaser) => {
+  if (taskDateStart) {
+    const inputs = Array.from(document.querySelectorAll("[name=date_from]"));
+    const { data, text } = taskDateStart;
+    const dateStartInTask = `${data.substring(0, 2)}/${data.substring(
+      2,
+      4
+    )}/${data.substring(4)} 23:59`;
+    const dateNow = new Date();
+    const todayDate = `${dateNow.getDate()}/${
+      dateNow.getMonth() + 1
+    }/${dateNow.getFullYear()} 00:00`;
+
+    const value = teaser.data ? dateStartInTask : todayDate;
+    const proof = teaser.data
+      ? text
+      : `Data dzisiejsza ponieważ: "${teaser.text}"`;
+    setInputValue({
+      inputs: inputs,
       value,
-      inpSelector: "[name=date_from]",
+      proofContainer: inputs[0].parentElement,
+      proof,
     });
   }
 };

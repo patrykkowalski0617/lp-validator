@@ -1,19 +1,20 @@
-import { fillInput } from "../../_helpers";
+import { setInputValue } from "../../_helpers";
 
-const dateEnd = (dateEnd) => {
-  if (dateEnd) {
-    // const dateEndInp = document.querySelector("[name=date_to]");
-    const dateEndObj = {
-      day: dateEnd.data.substring(0, 2),
-      month: dateEnd.data.substring(2, 4),
-      year: dateEnd.data.substring(4),
-    };
-    const value = `${dateEndObj.day}/${dateEndObj.month}/${dateEndObj.year} 23:59`;
+const dateEnd = (taskDateEnd) => {
+  if (taskDateEnd) {
+    const inputs = Array.from(document.querySelectorAll("[name=date_to]"));
+    const { data, text } = taskDateEnd;
 
-    fillInput({
-      text: dateEnd.text,
+    const value = `${data.substring(0, 2)}/${data.substring(
+      2,
+      4
+    )}/${data.substring(4)} 23:59`;
+
+    setInputValue({
+      inputs: inputs,
       value,
-      inpSelector: "[name=date_to]",
+      proofContainer: inputs[0].parentElement,
+      proof: text,
     });
   }
 };

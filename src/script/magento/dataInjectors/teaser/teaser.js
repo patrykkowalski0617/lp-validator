@@ -1,25 +1,26 @@
-import { renderProof } from "../../_helpers";
+import { _renderProof } from "../../_helpers";
 
-const teaser = (teaser) => {
+const teaser = (taskTeaser) => {
   const teaserInp = document.querySelector("[name=use_teaser]");
   const teaserBtn = document.querySelector("[name=use_teaser] + label");
-  if (teaser) {
+  if (taskTeaser) {
     if (
-      (teaser.data === true && teaserInp.value === "0") ||
-      (teaser.data === false && teaserInp.value === "1")
+      (taskTeaser.data === true && teaserInp.value === "0") ||
+      (taskTeaser.data === false && teaserInp.value === "1")
     ) {
       teaserBtn.click();
     }
 
-    const lpValidatorInfo = renderProof({
-      container: teaserInp.parentElement,
-      text: teaser.text,
+    const skipBtn = _renderProof({
+      proofContainer: teaserInp.parentElement,
+      proof: taskTeaser.text,
     });
-    const skipBtn = lpValidatorInfo.querySelector(".lp-validator-skip");
     skipBtn.addEventListener("click", (e) => {
       e.preventDefault();
       teaserBtn.click();
-      lpValidatorInfo.classList.toggle("lp-validator-skipped");
+      teaserInp.parentElement
+        .querySelector(".lp-validator-info")
+        .classList.toggle("lp-validator-skipped");
     });
   }
 };

@@ -4,3 +4,7 @@ export { default as dateStartFn } from "./dateStart/dateStart";
 export { default as titleFn } from "./title/title";
 export { default as urlFn } from "./url/url";
 export { default as teaserFn } from "./teaser/teaser";
+export { default as hexColorFn } from "./hexColor/hexColor";
+export { default as termsFn } from "./terms/terms";
+export { default as headerDatesFn } from "./headerDates/headerDates";
+export { default as stepsFn } from "./steps/steps";

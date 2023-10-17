@@ -1,12 +1,15 @@
-import { fillInput } from "../../_helpers";
+import { setInputValue } from "../../_helpers";
 
-const url = (url) => {
-  if (url) {
-    fillInput({
-      text: url.text,
-      value: url.data,
-      inpSelector: "[name=url]",
-      renderEl: document.querySelector("[name=url]").parentElement,
+const url = (taskUrl) => {
+  if (taskUrl) {
+    const inputs = Array.from(document.querySelectorAll("[name=url]"));
+    const { data, text } = taskUrl;
+
+    setInputValue({
+      inputs: inputs,
+      value: data,
+      proofContainer: inputs[0].parentElement.parentElement,
+      proof: text,
     });
   }
 };

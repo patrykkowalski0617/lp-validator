@@ -1,11 +1,11 @@
 import { setInputValue } from "../../_helpers";
 
-const code = (taskCode) => {
-  if (taskCode) {
+const terms = (taskTerms) => {
+  if (taskTerms) {
     const inputs = Array.from(
-      document.querySelectorAll("[for^=banner_hero_promo_code_] + input")
+      document.querySelectorAll("[id*=terms_and_condition_content_]")
     );
-    const { data, text } = taskCode;
+    const { data, text } = taskTerms;
 
     setInputValue({
       inputs: inputs,
@@ -16,4 +16,4 @@ const code = (taskCode) => {
   }
 };
 
-export default code;
+export default terms;
