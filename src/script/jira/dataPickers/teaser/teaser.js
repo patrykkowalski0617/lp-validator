@@ -1,14 +1,14 @@
-import { dataPicker } from "../../_helpers";
+import { findData } from "../../_helpers";
 
 const teaser = (paragraphs) => {
   const keyText = ["teaser"];
-  const extractData = ({ proof }) => {
-    const start = proof.indexOf(":");
-    const data = proof.substring(start).includes("tak");
+  const extractData = ({ text }) => {
+    const start = text.indexOf(":");
+    const data = text.substring(start).includes("tak");
     return data;
   };
 
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

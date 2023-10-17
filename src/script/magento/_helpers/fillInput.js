@@ -2,7 +2,7 @@ import { forceChangeEvent } from "../../_helpers";
 import renderProof from "./renderProof";
 
 const fillInput = ({
-  proof,
+  text,
   value,
   inpSelector,
   inpEl,
@@ -12,7 +12,7 @@ const fillInput = ({
 }) => {
   const inp = inpEl || document.querySelector(inpSelector);
   if (inp) {
-    renderProof({ container: renderEl || inp, proof, warn, error, inp, value });
+    renderProof({ container: renderEl || inp, text, warn, error, inp, value });
     inp.value = value;
     forceChangeEvent(inpSelector);
   } else {

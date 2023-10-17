@@ -1,7 +1,7 @@
-import { steps_dataPicker } from "./_helpers";
+import { steps_findData } from "./_helpers";
 
 const steps = (taskContentContainers) => {
-  return steps_dataPicker(taskContentContainers);
+  return steps_findData(taskContentContainers);
 };
 
 export default steps;

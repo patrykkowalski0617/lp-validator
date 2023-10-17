@@ -10,13 +10,13 @@
   max-height: 200px;
   border-radius: 15px;
   margin: 15px 0;
-  .lp-validator-proof {
+  .lp-validator-text {
     background-color: inherit !important;
     margin: 0;
     max-width: calc(100% - 30px);
     cursor: pointer;
   }
-  &.lp-validator-skipped .lp-validator-proof {
+  &.lp-validator-skipped .lp-validator-text {
     color: #797979 !important;
   }
   &:not(.lp-validator-skipped) {

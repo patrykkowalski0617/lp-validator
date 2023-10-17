@@ -11,7 +11,7 @@ const dateEnd = (dateEnd) => {
     const value = `${dateEndObj.day}/${dateEndObj.month}/${dateEndObj.year} 23:59`;
 
     fillInput({
-      proof: dateEnd.proof,
+      text: dateEnd.text,
       value,
       inpSelector: "[name=date_to]",
     });

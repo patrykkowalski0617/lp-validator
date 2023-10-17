@@ -9,10 +9,10 @@ import {
   teaserFn,
 } from "../dataInjectors";
 
-const fillGenerator = () => {
+const generatorViewAction = () => {
   console.clear();
-  navigator.clipboard.readText().then((cliproofLowerCase) => {
-    const taskData = customJSON.parse(cliproofLowerCase);
+  navigator.clipboard.readText().then((clitextLowerCase) => {
+    const taskData = customJSON.parse(clitextLowerCase);
     const {
       title,
       url,
@@ -45,7 +45,7 @@ const fillGenerator = () => {
         const XYdiscountInp = document.querySelector(
           "[id^=products_x_for_y_promo_discount_], [id^=products_new_x_for_y_promo_discount_]"
         );
-        const { data, proof } = mechanic;
+        const { data, text } = mechanic;
 
         if (inpXY) {
           switch (data) {
@@ -63,9 +63,9 @@ const fillGenerator = () => {
                 inpXY.click();
                 XYspendMoneyInp.value = XYspendMoney;
                 XYdiscountInp.value = XYdiscount;
-                renderProof({ container: inpXY.parentElement, proof });
-                renderProof({ container: XYspendMoneyInp, proof });
-                renderProof({ container: XYdiscountInp, proof });
+                renderProof({ container: inpXY.parentElement, text });
+                renderProof({ container: XYspendMoneyInp, text });
+                renderProof({ container: XYdiscountInp, text });
               }
               break;
 
@@ -90,7 +90,7 @@ const fillGenerator = () => {
         const getDate = (inpSelector, source) => {
           const inp = document.querySelector(inpSelector);
           if (inp) {
-            const { data: sourceDate, proof } = source;
+            const { data: sourceDate, text } = source;
             const sourceDay = sourceDate.substring(0, 2);
             const sourceMonth = sourceDate.substring(2, 4);
             const sourceYear = sourceDate.substring(4);
@@ -121,7 +121,7 @@ const fillGenerator = () => {
             const date = `${yyyy}-${mm}-${dd}T00:00`;
             inp.value = date;
 
-            renderProof({ container: inp, proof });
+            renderProof({ container: inp, text });
             forceChangeEvent(inp);
           }
         };
@@ -138,14 +138,14 @@ const fillGenerator = () => {
           `.module__banner_hero .input__color__text,
              .module__banner_hero .input__color`
         );
-        const { data, proof } = hex;
+        const { data, text } = hex;
         hexInps.forEach((el) => {
           if (data.length) {
             el.value = `#${data}`;
 
             forceChangeEvent(el);
           }
-          renderProof({ container: hexInps[0].parentElement, proof });
+          renderProof({ container: hexInps[0].parentElement, text });
         });
       }
     };
@@ -161,7 +161,7 @@ const fillGenerator = () => {
 
         renderProof({
           container: termsInp,
-          proof: terms.proof,
+          text: terms.text,
         });
         forceChangeEvent("[id*=terms_and_condition_content_]");
       }
@@ -195,4 +195,4 @@ const fillGenerator = () => {
   });
 };
 
-export default fillGenerator;
+export default generatorViewAction;

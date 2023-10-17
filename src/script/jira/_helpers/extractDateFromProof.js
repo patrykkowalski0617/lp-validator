@@ -1,7 +1,7 @@
-const extractDateFromProof = ({ proof, keyText }) => {
-  const date = proof
+const extractDateFromText = ({ text, keyText }) => {
+  const date = text
     .toLowerCase()
-    .substring(proof.indexOf(keyText))
+    .substring(text.indexOf(keyText))
     .split(" ")
     .filter((a) => !a.includes(":"))
     .map((x) => x.replace(/\D/g, ""))
@@ -12,4 +12,4 @@ const extractDateFromProof = ({ proof, keyText }) => {
   return data;
 };
 
-export default extractDateFromProof;
+export default extractDateFromText;

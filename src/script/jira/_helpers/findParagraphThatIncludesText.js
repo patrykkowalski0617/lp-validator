@@ -1,4 +1,4 @@
-const dataFinder_ParagraphThatIncludes = (keyText) => ({
+const findParagraphThatIncludesText = (keyText) => ({
   in: (paragraphs) => {
     return Array.from(paragraphs).find((paragraph) =>
       keyText.some((txt) => {
@@ -9,4 +9,4 @@ const dataFinder_ParagraphThatIncludes = (keyText) => ({
   },
 });
 
-export default dataFinder_ParagraphThatIncludes;
+export default findParagraphThatIncludesText;

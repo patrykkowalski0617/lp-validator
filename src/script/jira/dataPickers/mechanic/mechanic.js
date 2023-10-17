@@ -1,15 +1,16 @@
-import { dataPicker } from "../../_helpers";
+import { findData } from "../../_helpers";
 
 const mechanic = (paragraphs) => {
   const keyText = ["mechanika**:", "mechanika:"];
-  const extractData = ({ proof }) => {
-    const XY = proof.includes("ZA");
+  const extractData = ({ text }) => {
+    const XY =
+      text.toLowerCase().includes("za") && text.toLowerCase().includes("00");
     const amount =
-      proof.toLowerCase().includes("kwoto") ||
-      (proof.toLowerCase().includes("kodem") &&
-        !proof.toLowerCase().includes("proc"));
-    const proc = proof.toLowerCase().includes("proc");
-    const limit = proof.toLowerCase().includes("limi");
+      text.toLowerCase().includes("kwoto") ||
+      (text.toLowerCase().includes("kodem") &&
+        !text.toLowerCase().includes("proc"));
+    const proc = text.toLowerCase().includes("proc");
+    const limit = text.toLowerCase().includes("limi");
 
     const data = limit
       ? "limit"
@@ -24,7 +25,7 @@ const mechanic = (paragraphs) => {
     return data;
   };
 
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

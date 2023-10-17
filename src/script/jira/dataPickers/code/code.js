@@ -1,9 +1,9 @@
-import { dataPicker } from "../../_helpers";
+import { findData } from "../../_helpers";
 
 const code = (paragraphs) => {
   const keyText = ["mechanika**:", "mechanika:"];
-  const extractData = ({ proof }) => {
-    const take1 = proof
+  const extractData = ({ text }) => {
+    const take1 = text
       .split(" ")
       .filter((x) => isNaN(x))
       .filter((x) => {
@@ -29,7 +29,7 @@ const code = (paragraphs) => {
     return isNaN(Number(take1)) ? take1 : "";
   };
 
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

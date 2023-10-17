@@ -1,4 +1,4 @@
-export { default as extractDateFromProof } from "./extractDateFromProof";
-export { default as dataFinder_ParagraphThatIncludes } from "./dataFinder_ParagraphThatIncludes";
-export { default as dataPicker } from "./dataPicker";
+export { default as extractDateFromText } from "./extractDateFromProof";
+export { default as findParagraphThatIncludesText } from "./findParagraphThatIncludesText";
+export { default as findData } from "./findData";
 export { default as collectTaskData } from "./collectTaskData";

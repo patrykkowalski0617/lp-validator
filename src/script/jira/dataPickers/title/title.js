@@ -1,12 +1,12 @@
-import { dataPicker } from "../../_helpers";
+import { findData } from "../../_helpers";
 
 const title = (paragraphs) => {
   const keyText = ["tytuł:", "tytuł*:"];
-  const extractData = ({ proof }) => {
-    const start = proof.indexOf(":") + 1;
-    return proof.substring(start).trim();
+  const extractData = ({ text }) => {
+    const start = text.indexOf(":") + 1;
+    return text.substring(start).trim();
   };
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

@@ -1,4 +1,4 @@
-const steps_dataFinder = (taskContentContainers) => {
+const steps_findParagraph = (taskContentContainers) => {
   const htmlWithSteps = Array.from(taskContentContainers).find(
     (taskDataContainer) => {
       const textContent = taskDataContainer.textContent;
@@ -9,14 +9,13 @@ const steps_dataFinder = (taskContentContainers) => {
         const maxStepsLength = 2000;
         return length < maxStepsLength && length > minStepsLength;
       };
-      const numOfListItemCondition = (taskDataContainer) => {
+      const numOfListItemCondition = () => {
         const maxNumOfListItem = 3;
-        const nodeName = taskDataContainer.nodeName;
+        const nodeName = taskDataContainer.nodeName.toUpperCase();
+        const liElements = Array.from(taskDataContainer.querySelectorAll("li"));
         const isListNode = nodeName === "UL" || nodeName === "OL";
         return (
-          (isListNode &&
-            taskDataContainer.querySelectorAll("li").length <=
-              maxNumOfListItem) ||
+          (isListNode && liElements.length <= maxNumOfListItem) ||
           nodeName === "P"
         );
       };
@@ -24,6 +23,7 @@ const steps_dataFinder = (taskContentContainers) => {
         const keyWordsGroups = [
           ["wybier", "dokończ"],
           ["dodaj", "dokończ"],
+          ["dodaj", "produkt", "rabat"],
           ["przyjdź", "wybier"],
           ["zakup", "odbierz"],
         ];
@@ -37,7 +37,7 @@ const steps_dataFinder = (taskContentContainers) => {
       };
       return (
         lengthCondition(textContent) &&
-        numOfListItemCondition(taskDataContainer) &&
+        numOfListItemCondition() &&
         keyWordsCondition(textContent)
       );
     }
@@ -45,4 +45,4 @@ const steps_dataFinder = (taskContentContainers) => {
   return htmlWithSteps;
 };
 
-export default steps_dataFinder;
+export default steps_findParagraph;

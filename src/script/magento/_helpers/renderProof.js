@@ -1,12 +1,12 @@
-const renderProof = ({ inp, value, container, proof, warn, error }) => {
+const renderProof = ({ inp, value, container, text, warn, error }) => {
   if (container) {
     const oryginalVal = inp ? inp.value : null;
 
-    const alreadyRenderedProof =
+    const alreadyRenderedtext =
       container.parentElement.querySelector(".lp-validator-info");
 
-    if (alreadyRenderedProof) {
-      alreadyRenderedProof.remove();
+    if (alreadyRenderedtext) {
+      alreadyRenderedtext.remove();
     }
 
     container.insertAdjacentHTML(
@@ -16,16 +16,14 @@ const renderProof = ({ inp, value, container, proof, warn, error }) => {
       }${warn === true ? " lp-validator-warn" : ""}${
         oryginalVal === value ? " lp-validator-compatible" : ""
       }'>
-          <p class='lp-validator-proof'>${proof}</p>
+          <p class='lp-validator-text'>${text}</p>
           <button class="lp-validator-skip">add</button>
         </div>`
     );
     const skipBtn = container.parentElement.querySelector(".lp-validator-skip");
-    const proofEl = container.parentElement.querySelector(
-      ".lp-validator-proof"
-    );
-    const parent = proofEl.parentElement;
-    proofEl.addEventListener("click", (e) => {
+    const textEl = container.parentElement.querySelector(".lp-validator-text");
+    const parent = textEl.parentElement;
+    textEl.addEventListener("click", (e) => {
       navigator.clipboard.writeText(e.target.textContent);
       parent.classList.add("lp-validator-copied");
       setTimeout(() => {

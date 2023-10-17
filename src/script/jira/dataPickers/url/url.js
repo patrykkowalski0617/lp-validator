@@ -1,12 +1,12 @@
 import { formatUrl } from "../../../_helpers";
-import { dataPicker } from "../../_helpers";
+import { findData } from "../../_helpers";
 
 const url = (paragraphs) => {
   const keyText = ["url:"];
   const extractData = ({ paragraph }) =>
     formatUrl(paragraph.querySelector("a").href);
 
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

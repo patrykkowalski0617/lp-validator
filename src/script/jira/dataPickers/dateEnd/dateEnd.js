@@ -1,11 +1,11 @@
-import { extractDateFromProof, dataPicker } from "../../_helpers";
+import { extractDateFromText, findData } from "../../_helpers";
 
 const dateEnd = (paragraphs) => {
   const keyText = ["data do:"];
-  const extractData = ({ proof, keyText }) =>
-    extractDateFromProof({ proof, keyText });
+  const extractData = ({ text, keyText }) =>
+    extractDateFromText({ text, keyText });
 
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

@@ -5,7 +5,7 @@ const code = (code) => {
     const error = code.data.includes(",");
 
     fillInput({
-      proof: code.proof,
+      text: code.text,
       value: code.data,
       inpSelector: "[for^=banner_hero_promo_code_] + input",
       error,

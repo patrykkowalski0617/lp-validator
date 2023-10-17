@@ -11,6 +11,9 @@ import {
   steps,
 } from "../dataPickers";
 
+// this function call all dataPickers
+// and collect data in taskData object
+
 const collectTaskData = (jiraBody) => {
   const taskData = {};
   const paragraphs = jiraBody.querySelectorAll(".ak-renderer-document p");

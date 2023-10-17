@@ -13,7 +13,7 @@ const teaser = (teaser) => {
 
     const lpValidatorInfo = renderProof({
       container: teaserInp.parentElement,
-      proof: teaser.proof,
+      text: teaser.text,
     });
     const skipBtn = lpValidatorInfo.querySelector(".lp-validator-skip");
     skipBtn.addEventListener("click", (e) => {

@@ -1,4 +1,4 @@
-import { dataPicker } from "../../_helpers";
+import { findData } from "../../_helpers";
 
 const terms = (paragraphs) => {
   const keyText = ["oznaczon"];
@@ -13,7 +13,7 @@ const terms = (paragraphs) => {
     return data;
   };
 
-  return dataPicker({
+  return findData({
     paragraphs,
     keyText,
     extractData,

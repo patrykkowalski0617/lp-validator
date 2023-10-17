@@ -14,12 +14,12 @@ const dateStart = (dateStart, teaser) => {
       date.getMonth() + 1
     }/${date.getFullYear()} 00:00`;
     const value = teaser.data === true ? taskStartDate : todayDate;
-    const startProof =
+    const starttext =
       teaser.data === true
-        ? dateStart.proof
-        : `Data dzisiejsza ponieważ: "${teaser.proof}"`;
+        ? dateStart.text
+        : `Data dzisiejsza ponieważ: "${teaser.text}"`;
     fillInput({
-      proof: startProof,
+      text: starttext,
       value,
       inpSelector: "[name=date_from]",
     });
