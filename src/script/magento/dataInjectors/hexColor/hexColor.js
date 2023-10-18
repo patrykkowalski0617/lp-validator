@@ -8,6 +8,7 @@ const hexColor = (taskHexColor) => {
            .module__banner_hero .input__color`
       )
     );
+    if (!inputs.length) return;
     const { data, text } = taskHexColor;
 
     setInputValue({

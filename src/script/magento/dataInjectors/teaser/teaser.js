@@ -1,4 +1,4 @@
-import { _renderProof } from "../../_helpers";
+import { renderProof } from "../../_helpers";
 
 const teaser = (taskTeaser) => {
   const teaserInp = document.querySelector("[name=use_teaser]");
@@ -11,7 +11,7 @@ const teaser = (taskTeaser) => {
       teaserBtn.click();
     }
 
-    const skipBtn = _renderProof({
+    const skipBtn = renderProof({
       proofContainer: teaserInp.parentElement,
       proof: taskTeaser.text,
     });

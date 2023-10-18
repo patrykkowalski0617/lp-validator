@@ -5,6 +5,7 @@ const title = (taskTitle) => {
     const inputs = Array.from(
       document.querySelectorAll(".admin__field-control [name=name]")
     );
+    if (!inputs.length) return;
     const { data, text } = taskTitle;
 
     setInputValue({

@@ -3,6 +3,7 @@ import { setInputValue } from "../../_helpers";
 const dateStart = (taskDateStart, teaser) => {
   if (taskDateStart) {
     const inputs = Array.from(document.querySelectorAll("[name=date_from]"));
+    if (!inputs.length) return;
     const { data, text } = taskDateStart;
     const dateStartInTask = `${data.substring(0, 2)}/${data.substring(
       2,

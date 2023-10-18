@@ -1,8 +1,9 @@
 import { setInputValue } from "../../_helpers";
 
-const headersDates = ({ dateSource, actionType, numOfDays, inputSelector }) => {
+const headerDates = ({ dateSource, actionType, numOfDays, inputSelector }) => {
   if (dateSource) {
     const inputs = Array.from(document.querySelectorAll(inputSelector));
+    if (!inputs.length) return;
     const { data, text } = dateSource;
 
     const h24 = 24 * 60 * 60 * 1000;
@@ -30,4 +31,4 @@ const headersDates = ({ dateSource, actionType, numOfDays, inputSelector }) => {
   }
 };
 
-export default headersDates;
+export default headerDates;

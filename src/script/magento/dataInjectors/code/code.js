@@ -5,6 +5,7 @@ const code = (taskCode) => {
     const inputs = Array.from(
       document.querySelectorAll("[for^=banner_hero_promo_code_] + input")
     );
+    if (!inputs.length) return;
     const { data, text } = taskCode;
 
     setInputValue({

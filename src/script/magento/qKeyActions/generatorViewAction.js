@@ -1,4 +1,4 @@
-import { bodyFlesh, customJSON, forceChangeEvent } from "../../_helpers";
+import { bodyFlesh, customJSON } from "../../_helpers";
 import { renderProof } from "../_helpers";
 import {
   titleFn,
@@ -75,7 +75,7 @@ const generatorViewAction = () => {
         if (inpXY) {
           switch (data) {
             case "XY":
-              const dataClean = code.data
+              const dataClean = taskCode.data
                 .toLowerCase()
                 .split(",")
                 .filter((x) => x.includes("za"))
@@ -88,9 +88,18 @@ const generatorViewAction = () => {
                 inpXY.click();
                 XYspendMoneyInp.value = XYspendMoney;
                 XYdiscountInp.value = XYdiscount;
-                renderProof({ container: inpXY.parentElement, text });
-                renderProof({ container: XYspendMoneyInp, text });
-                renderProof({ container: XYdiscountInp, text });
+                renderProof({
+                  proofContainer: inpXY.parentElement.parentElement,
+                  proof: text,
+                });
+                renderProof({
+                  proofContainer: XYspendMoneyInp.parentElement.parentElement,
+                  proof: text,
+                });
+                renderProof({
+                  proofContainer: XYdiscountInp.parentElement.parentElement,
+                  proof: text,
+                });
               }
               break;
 
@@ -107,28 +116,28 @@ const generatorViewAction = () => {
     };
     mechanicFn();
 
-    // // Default clicks
-    // const bannerHeroDefault = () => {
-    //   const btn = document.querySelectorAll(
-    //     ".module__banner_hero .chill-btn"
-    //   )[2];
-    //   if (btn) {
-    //     btn.click();
-    //   }
-    //   console.warn("btn is not found");
-    // };
-    // bannerHeroDefault();
+    // Default clicks
+    const bannerHeroDefault = () => {
+      const btn = document.querySelectorAll(
+        ".module__banner_hero .chill-btn"
+      )[2];
+      if (btn) {
+        btn.click();
+      }
+      console.warn("btn is not found");
+    };
+    bannerHeroDefault();
 
-    // const listingDefault = () => {
-    //   const modules = document.querySelectorAll(
-    //     ".module__products, .module__products_new"
-    //   );
-    //   modules.forEach((module) => {
-    //     const btn = module.querySelectorAll(".chill-btn")[2];
-    //     btn.click();
-    //   });
-    // };
-    // listingDefault();
+    const listingDefault = () => {
+      const modules = document.querySelectorAll(
+        ".module__products, .module__products_new"
+      );
+      modules.forEach((module) => {
+        const btn = module.querySelectorAll(".chill-btn")[2];
+        btn.click();
+      });
+    };
+    listingDefault();
 
     bodyFlesh();
   });
