@@ -8,7 +8,7 @@ const dateStart = (taskDateStart, teaser) => {
     const dateStartInTask = `${data.substring(0, 2)}/${data.substring(
       2,
       4
-    )}/${data.substring(4)} 23:59`;
+    )}/${data.substring(4)} 00:00`;
     const dateNow = new Date();
     const todayDate = `${dateNow.getDate()}/${
       dateNow.getMonth() + 1
