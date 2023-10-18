@@ -1,6 +1,6 @@
 import { forceChangeEvent } from "../../_helpers";
 
-const manageSkipBtn = ({
+const manageInputSkipBtn = ({
   inputs,
   value,
   proofContainer,
@@ -21,4 +21,4 @@ const manageSkipBtn = ({
   });
 };
 
-export default manageSkipBtn;
+export default manageInputSkipBtn;

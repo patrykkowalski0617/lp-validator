@@ -1,5 +1,6 @@
-import { renderProof, manageSkipBtn } from ".";
+import { renderProof } from ".";
 import { forceChangeEvent } from "../../_helpers";
+import manageInputSkipBtn from "./manageInputSkipBtn";
 
 const setInputValue = ({ inputs, value, proofContainer, proof }) => {
   // set values
@@ -16,7 +17,13 @@ const setInputValue = ({ inputs, value, proofContainer, proof }) => {
   const skipBtn = renderProof({ proofContainer, proof });
 
   // manage skipBtn
-  manageSkipBtn({ inputs, value, proofContainer, skipBtn, oryginalValues });
+  manageInputSkipBtn({
+    inputs,
+    value,
+    proofContainer,
+    skipBtn,
+    oryginalValues,
+  });
 };
 
 export default setInputValue;
