@@ -1,7 +1,7 @@
 import { findData } from "../../_helpers";
 
 const mechanic = (paragraphs) => {
-  const keyText = ["mechanika**:", "mechanika:"];
+  const keyText = ["mechanika**:", "mechanika:", "mechanika :"];
   const extractData = ({ text }) => {
     const XY =
       text.toLowerCase().includes("za") && text.toLowerCase().includes("00");
