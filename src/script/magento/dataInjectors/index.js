@@ -8,3 +8,4 @@ export { default as hexColorFn } from "./hexColor/hexColor";
 export { default as termsFn } from "./terms/terms";
 export { default as headerDatesFn } from "./headerDates/headerDates";
 export { default as stepsFn } from "./steps/steps";
+export { default as mechanicFn } from "./mechanic/mechanic";
