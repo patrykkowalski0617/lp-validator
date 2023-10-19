@@ -26,7 +26,7 @@ const code = (paragraphs) => {
         return firstCharacter && secondCharacter;
       })
       .join();
-    return isNaN(Number(take1)) ? take1 : "";
+    return isNaN(Number(take1)) && !take1.includes(",") ? take1 : "";
   };
 
   return findData({
