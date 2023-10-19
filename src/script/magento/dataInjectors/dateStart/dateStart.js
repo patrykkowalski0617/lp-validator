@@ -1,7 +1,7 @@
 import { setInputValue } from "../../_helpers";
 
 const dateStart = (taskDateStart, teaser) => {
-  if (taskDateStart && teaser) {
+  if (taskDateStart) {
     const inputs = Array.from(document.querySelectorAll("[name=date_from]"));
     if (!inputs.length) return;
     const { data, text } = taskDateStart;
@@ -14,10 +14,11 @@ const dateStart = (taskDateStart, teaser) => {
       dateNow.getMonth() + 1
     }/${dateNow.getFullYear()} 00:00`;
 
-    const value = teaser.data ? dateStartInTask : todayDate;
-    const proof = teaser.data
-      ? text
-      : `Data dzisiejsza ponieważ: "${teaser.text}"`;
+    const value = teaser && teaser.data ? dateStartInTask : todayDate;
+    const proof =
+      teaser && teaser.data
+        ? `Data dzisiejsza ponieważ: "${teaser.text}"`
+        : text;
     setInputValue({
       inputs: inputs,
       value,
