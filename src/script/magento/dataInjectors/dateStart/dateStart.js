@@ -1,7 +1,7 @@
 import { setInputValue } from "../../_helpers";
 
 const dateStart = (taskDateStart, teaser) => {
-  if (taskDateStart) {
+  if (taskDateStart && teaser) {
     const inputs = Array.from(document.querySelectorAll("[name=date_from]"));
     if (!inputs.length) return;
     const { data, text } = taskDateStart;
