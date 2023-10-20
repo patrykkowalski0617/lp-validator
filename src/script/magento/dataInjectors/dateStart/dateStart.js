@@ -17,8 +17,8 @@ const dateStart = (taskDateStart, teaser) => {
     const value = teaser && teaser.data ? dateStartInTask : todayDate;
     const proof =
       teaser && teaser.data
-        ? `Data dzisiejsza ponieważ: "${teaser.text}"`
-        : text;
+        ? text
+        : `Data dzisiejsza ponieważ: "${teaser.text}"`;
     setInputValue({
       inputs: inputs,
       value,
