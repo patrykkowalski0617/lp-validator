@@ -4,9 +4,9 @@ const steps_findData = (taskContentContainers) => {
   const stepsEl = steps_findParagraph(taskContentContainers);
   if (!stepsEl) return;
   const liElements = Array.from(stepsEl.querySelectorAll("li"));
-  const text = stepsEl.textContent;
+  const text = stepsEl.innerHTML;
   const data = liElements.length
-    ? liElements.map((el) => el.textContent)
+    ? liElements.map((el) => el.innerHTML)
     : text
         .replace(/(\r\n|\n|\r)/gm, "")
         .replace(/\s+/g, " ")
