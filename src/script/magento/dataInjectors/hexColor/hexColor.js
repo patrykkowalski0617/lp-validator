@@ -1,7 +1,7 @@
 import { setInputValue } from "../../_helpers";
 
 const hexColor = (taskHexColor) => {
-  if (taskHexColor) {
+  if (taskHexColor.length) {
     const inputs = Array.from(
       document.querySelectorAll(
         `.module__banner_hero .input__color__text,
