@@ -9,7 +9,7 @@ const extractDateFromText = ({ text, keyText }) => {
     .filter((y) => Number(y))
     .join("");
 
-  const data = date.length < 5 ? date + date.getFullYear() : date;
+  const data = date && date.length < 5 ? date + date.getFullYear() : date;
 
   return data;
 };
