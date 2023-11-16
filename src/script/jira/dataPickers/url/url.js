@@ -11,10 +11,9 @@ const url = (paragraphs) => {
   //   keyText,
   //   extractData,
   // });
-  const data = formatUrl(
-    document.querySelector(".ak-renderer-document a").href
-  );
-  const text = document.querySelector(".ak-renderer-document a").innerHTML;
+  const ancor = document.querySelector(".ak-renderer-document a");
+  const data = formatUrl(ancor ? ancor.href : null);
+  const text = ancor ? ancor.innerHTML : "";
   return { data, text };
 };
 

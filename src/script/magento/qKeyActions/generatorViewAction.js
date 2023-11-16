@@ -58,7 +58,9 @@ const generatorViewAction = () => {
       inputSelector: "input#image-2_suffixPlaceholder",
     });
     steps(taskSteps);
-    mechanicFn(taskMechanic);
+    if (taskMechanic) {
+      mechanicFn(taskMechanic);
+    }
 
     // Default clicks
     const defaultFixBtns = document.querySelectorAll(".chill-btn-defaultFix");
