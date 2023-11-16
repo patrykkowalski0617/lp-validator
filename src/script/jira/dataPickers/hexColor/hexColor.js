@@ -14,7 +14,7 @@ const hexColor = (paragraphs) => {
         ? _take2
         : "";
     const data = take1.length ? take1 : take2;
-    return data.replaceAll("#", "");
+    return data.replace("#", "");
   };
 
   return findData({

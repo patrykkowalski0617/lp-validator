@@ -10,6 +10,8 @@ const steps_findData = (taskContentContainers) => {
     : text
         .replace(/(\r\n|\n|\r)/gm, "")
         .replace(/\s+/g, " ")
+        .replace("<br/>", " ")
+        .replace("<br>", " ")
         .split(/[0-9]*\. /)
         .filter((step) => step.length > 20)
         .map((step) => step.trim());
