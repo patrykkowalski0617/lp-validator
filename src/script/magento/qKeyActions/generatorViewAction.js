@@ -63,10 +63,10 @@ const generatorViewAction = () => {
     }
 
     // Default clicks
-    const defaultFixBtns = document.querySelectorAll(".chill-btn-defaultFix");
-    defaultFixBtns.forEach((defaultFixBtn) => {
-      defaultFixBtn.click();
-    });
+    // const defaultFixBtns = document.querySelectorAll(".chill-btn-defaultFix");
+    // defaultFixBtns.forEach((defaultFixBtn) => {
+    //   defaultFixBtn.click();
+    // });
     bodyFlesh();
   });
 };
