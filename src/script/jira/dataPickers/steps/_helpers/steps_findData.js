@@ -5,16 +5,20 @@ const steps_findData = (taskContentContainers) => {
   if (!stepsEl) return;
   const liElements = Array.from(stepsEl.querySelectorAll("li"));
   const text = stepsEl.innerHTML;
+
+  const clearTxt = (txt) =>
+    txt
+      .replaceAll("<br>", " ")
+      .replaceAll("<br/>", " ")
+      .replace(/(\r\n|\n|\r)/gm, "")
+      .replace(/\s+/g, " ")
+      .split(/[\d]+\./)
+      .filter((step) => step.length > 20)
+      .map((step) => step.trim());
+
   const data = liElements.length
-    ? liElements.map((el) => el.innerHTML)
-    : text
-        .replace(/(\r\n|\n|\r)/gm, "")
-        .replace(/\s+/g, " ")
-        .replace("<br/>", " ")
-        .replace("<br>", " ")
-        .split(/[0-9]*\. /)
-        .filter((step) => step.length > 20)
-        .map((step) => step.trim());
+    ? liElements.map((el) => clearTxt(el.innerHTML))
+    : clearTxt(text);
   return { data, text };
 };
 

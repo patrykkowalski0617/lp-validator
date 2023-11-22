@@ -1,7 +1,7 @@
 import { findData } from "../../_helpers";
 
 const hexColor = (paragraphs) => {
-  const keyText = ["hex", "kolor"];
+  const keyText = [["hex"], ["kolor"]];
   const extractData = ({ text }) => {
     const start = text.indexOf(":") + 1;
     const _take1 = text.substring(start).trim();

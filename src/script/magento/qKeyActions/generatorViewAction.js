@@ -28,7 +28,7 @@ const generatorViewAction = () => {
       terms: taskTerms,
       steps: taskSteps,
     } = taskData;
-    console.clear();
+    // console.clear();
     console.log("magento taskData", taskData);
 
     titleFn(taskTitle);
