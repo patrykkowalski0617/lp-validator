@@ -1,4 +1,4 @@
-const findParagraphThatIncludesText = (keyText) => ({
+const findParagraphThatIncludesText = (keyTextGroups) => ({
   in: (paragraphs) => {
     const txtThatInludesOneOfKeyWordsGroup = (textContent, keyWordsGroups) => {
       const txt = textContent.toLowerCase();
@@ -15,7 +15,7 @@ const findParagraphThatIncludesText = (keyText) => ({
     };
 
     return Array.from(paragraphs).find((paragraph) =>
-      txtThatInludesOneOfKeyWordsGroup(paragraph.textContent, keyText)
+      txtThatInludesOneOfKeyWordsGroup(paragraph.textContent, keyTextGroups)
     );
   },
 });

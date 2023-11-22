@@ -20,7 +20,7 @@ const steps_findParagraph = (taskContentContainers) => {
         );
       };
       const keyWordsCondition = (textContent) => {
-        const keyWordsGroups = [
+        const keyTextGroups = [
           ["wybier", "dokończ"],
           ["dodaj", "dokończ"],
           ["dodaj", "produkt", "rabat"],
@@ -30,10 +30,10 @@ const steps_findParagraph = (taskContentContainers) => {
         const txt = textContent.toLowerCase();
         const isTxtInludesKeyWordsGroup = (keyWordsGroup) =>
           keyWordsGroup.every((currentValue) => txt.includes(currentValue));
-        const isTxtInludesOneOfKeyWordsGroup = (keyWordsGroups) =>
-          keyWordsGroups.some(isTxtInludesKeyWordsGroup);
+        const isTxtInludesOneOfKeyWordsGroup = (keyTextGroups) =>
+          keyTextGroups.some(isTxtInludesKeyWordsGroup);
 
-        return isTxtInludesOneOfKeyWordsGroup(keyWordsGroups);
+        return isTxtInludesOneOfKeyWordsGroup(keyTextGroups);
       };
       return (
         lengthCondition(textContent) &&

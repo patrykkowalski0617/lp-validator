@@ -1,7 +1,7 @@
 import { findData } from "../../_helpers";
 
 const teaser = (paragraphs) => {
-  const keyText = [["teaser"]];
+  const keyTextGroups = [["teaser"]];
   const extractData = ({ text }) => {
     const start = text.indexOf(":");
     const data = text.substring(start).includes("tak");
@@ -10,7 +10,7 @@ const teaser = (paragraphs) => {
 
   return findData({
     paragraphs,
-    keyText,
+    keyTextGroups,
     extractData,
   });
 };

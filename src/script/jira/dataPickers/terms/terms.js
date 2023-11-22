@@ -2,7 +2,7 @@ import { removeCounterFromTxt } from "../../../_helpers";
 import { findData } from "../../_helpers";
 
 const terms = (paragraphs) => {
-  const keyText = [
+  const keyTextGroups = [
     ["tekst", "regulaminu"],
     ["okres", "oznaczon"],
     ["od", "do", "kod", "godz"],
@@ -20,7 +20,7 @@ const terms = (paragraphs) => {
 
   return findData({
     paragraphs,
-    keyText,
+    keyTextGroups,
     extractData,
   });
 };

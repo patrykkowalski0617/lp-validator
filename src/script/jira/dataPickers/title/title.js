@@ -1,7 +1,7 @@
 import { findData } from "../../_helpers";
 
 const title = (paragraphs) => {
-  const keyText = [
+  const keyTextGroups = [
     ["tytuł:"],
     ["tytuł*:"],
     ["tytuł :"],
@@ -14,7 +14,7 @@ const title = (paragraphs) => {
   };
   return findData({
     paragraphs,
-    keyText,
+    keyTextGroups,
     extractData,
   });
 };

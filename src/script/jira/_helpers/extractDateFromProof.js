@@ -1,4 +1,4 @@
-const extractDateFromText = ({ text, keyText }) => {
+const extractDateFromText = ({ text }) => {
   const date = text
     .toLowerCase()
     .replace("od:")

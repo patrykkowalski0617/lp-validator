@@ -1,7 +1,7 @@
 import { findData } from "../../_helpers";
 
 const code = (paragraphs) => {
-  const keyText = [["mechanika**:"], ["mechanika:"], ["mechanika :"]];
+  const keyTextGroups = [["mechanika**:"], ["mechanika:"], ["mechanika :"]];
   const extractData = ({ text }) => {
     const take1 = text
       .split(" ")
@@ -31,7 +31,7 @@ const code = (paragraphs) => {
 
   return findData({
     paragraphs,
-    keyText,
+    keyTextGroups,
     extractData,
   });
 };

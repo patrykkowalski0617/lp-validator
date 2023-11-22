@@ -1,13 +1,13 @@
 import { extractDateFromText, findData } from "../../_helpers";
 
 const dateEnd = (paragraphs) => {
-  const keyText = [["data do:"], ["data do :"]];
-  const extractData = ({ text, keyText }) =>
-    extractDateFromText({ text, keyText });
+  const keyTextGroups = [["data do:"], ["data do :"]];
+  const extractData = ({ text, keyTextGroups }) =>
+    extractDateFromText({ text, keyTextGroups });
 
   return findData({
     paragraphs,
-    keyText,
+    keyTextGroups,
     extractData,
   });
 };
