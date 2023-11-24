@@ -39,6 +39,7 @@ const generatorViewAction = () => {
     codeFn(taskCode);
     hexColorFn(taskHexColor);
     termsFn(taskTerms);
+
     headerDatesFn({
       dateSource: taskDateStart,
       actionType: "+",
@@ -48,13 +49,13 @@ const generatorViewAction = () => {
     headerDatesFn({
       dateSource: taskDateEnd,
       actionType: "-",
-      numOfDays: 2,
+      numOfDays: 1,
       inputSelector: "input#image-1_suffixPlaceholder",
     });
     headerDatesFn({
       dateSource: taskDateEnd,
       actionType: "-",
-      numOfDays: 1,
+      numOfDays: 0,
       inputSelector: "input#image-2_suffixPlaceholder",
     });
 
@@ -72,14 +73,14 @@ const generatorViewAction = () => {
     headerDatesFn({
       dateSource: taskDateEnd,
       actionType: "-",
-      numOfDays: 2,
+      numOfDays: 1,
       inputSelector: "[id^='banner_alt_']",
       container: bannerModules[2],
     });
     headerDatesFn({
       dateSource: taskDateEnd,
       actionType: "-",
-      numOfDays: 1,
+      numOfDays: 0,
       inputSelector: "[id^='banner_alt_']",
       container: bannerModules[3],
     });

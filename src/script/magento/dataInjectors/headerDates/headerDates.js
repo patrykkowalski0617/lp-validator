@@ -5,7 +5,7 @@ const headerDates = ({
   actionType,
   numOfDays,
   inputSelector,
-  container = document,
+  container = document.body,
 }) => {
   if (dateSource) {
     const inputs = Array.from(container.querySelectorAll(inputSelector));
