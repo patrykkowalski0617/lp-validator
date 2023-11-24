@@ -7,6 +7,7 @@ const manageInputSkipBtn = ({
   skipBtn,
   oryginalValues,
 }) => {
+  if (!skipBtn) return;
   skipBtn.addEventListener("click", (e) => {
     e.preventDefault();
     inputs.forEach((input, i) => {

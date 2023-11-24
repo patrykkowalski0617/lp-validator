@@ -57,6 +57,32 @@ const generatorViewAction = () => {
       numOfDays: 1,
       inputSelector: "input#image-2_suffixPlaceholder",
     });
+
+    const bannerModules = document.querySelectorAll(".module.module__banner");
+    if (bannerModules.length) {
+      bannerModules[0].querySelector(".bannerOryginal").click();
+    }
+    headerDatesFn({
+      dateSource: taskDateEnd,
+      actionType: "+",
+      numOfDays: 1,
+      inputSelector: "[id^='banner_alt_']",
+      container: bannerModules[1],
+    });
+    headerDatesFn({
+      dateSource: taskDateEnd,
+      actionType: "-",
+      numOfDays: 2,
+      inputSelector: "[id^='banner_alt_']",
+      container: bannerModules[2],
+    });
+    headerDatesFn({
+      dateSource: taskDateEnd,
+      actionType: "-",
+      numOfDays: 1,
+      inputSelector: "[id^='banner_alt_']",
+      container: bannerModules[3],
+    });
     steps(taskSteps);
     if (taskMechanic) {
       mechanicFn(taskMechanic);

@@ -1,8 +1,14 @@
 import { setInputValue } from "../../_helpers";
 
-const headerDates = ({ dateSource, actionType, numOfDays, inputSelector }) => {
+const headerDates = ({
+  dateSource,
+  actionType,
+  numOfDays,
+  inputSelector,
+  container = document,
+}) => {
   if (dateSource) {
-    const inputs = Array.from(document.querySelectorAll(inputSelector));
+    const inputs = Array.from(container.querySelectorAll(inputSelector));
     if (!inputs.length) return;
     const { data, text } = dateSource;
 
@@ -20,7 +26,9 @@ const headerDates = ({ dateSource, actionType, numOfDays, inputSelector }) => {
     const yyyy = String(newDate.getFullYear());
     const mm = String(newDate.getMonth() + 1).padStart(2, "0");
     const dd = String(newDate.getDate()).padStart(2, "0");
-    const value = `${yyyy}-${mm}-${dd}T00:00`;
+    const value = container.classList.contains("module__banner")
+      ? `update_banner-from ${yyyy}-${mm}-${dd}T00:00`
+      : `${yyyy}-${mm}-${dd}T00:00`;
 
     setInputValue({
       inputs: inputs,
