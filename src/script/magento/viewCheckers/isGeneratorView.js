@@ -1,7 +1,9 @@
 const isGeneratorView = () => {
   return Boolean(
     document.querySelector("#lpGenerator") ||
-      document.querySelector(".page-title").textContent === "Nowy Landing Page"
+      (document.querySelector(".page-title") &&
+        document.querySelector(".page-title").textContent ===
+          "Nowy Landing Page")
   );
 };
 

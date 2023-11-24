@@ -5,7 +5,7 @@ const terms = (paragraphs) => {
   const keyTextGroups = [
     ["tekst", "regulaminu"],
     ["okres", "oznaczon"],
-    ["od", "do", "kod", "godz"],
+    ["od ", "do ", "kod", "godz"],
   ];
   const extractData = ({ paragraph }) => {
     const data = `<p>${removeCounterFromTxt(paragraph.innerHTML)

@@ -10,7 +10,7 @@ const steps_findParagraph = (taskContentContainers) => {
         return length < maxStepsLength && length > minStepsLength;
       };
       const numOfListItemCondition = () => {
-        const maxNumOfListItem = 3;
+        const maxNumOfListItem = 4;
         const nodeName = taskDataContainer.nodeName.toUpperCase();
         const liElements = Array.from(taskDataContainer.querySelectorAll("li"));
         const isListNode = nodeName === "UL" || nodeName === "OL";
@@ -22,6 +22,7 @@ const steps_findParagraph = (taskContentContainers) => {
       const keyWordsCondition = (textContent) => {
         const keyTextGroups = [
           ["wybier", "dokończ"],
+          ["wybier", "podpisz"],
           ["dodaj", "dokończ"],
           ["dodaj", "produkt", "rabat"],
           ["przyjdź", "wybier"],

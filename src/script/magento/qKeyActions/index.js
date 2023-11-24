@@ -3,11 +3,13 @@ import {
   isLpListView,
   isLpFilterView,
   isMainView,
+  isLoginPageView,
 } from "../viewCheckers";
 import mainPageViewAction from "./mainPageViewAction";
 import lpListViewAction from "./lpListViewAction";
 import lpFilterViewAction from "./lpFilterViewAction";
 import generatorViewAction from "./generatorViewAction";
+import loginPageViewAction from "./loginPageViewAction";
 
 const qKeyActions = (magentoBody) => {
   if (isMainView()) {
@@ -18,6 +20,8 @@ const qKeyActions = (magentoBody) => {
     lpFilterViewAction();
   } else if (isGeneratorView()) {
     generatorViewAction(magentoBody);
+  } else if (isLoginPageView()) {
+    loginPageViewAction(magentoBody);
   }
 };
 
