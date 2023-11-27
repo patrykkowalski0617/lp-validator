@@ -15,7 +15,7 @@ const headerDates = ({
     const h24 = 24 * 60 * 60 * 1000;
     const sourceDay = data.substring(0, 2);
     const sourceMonth = data.substring(2, 4);
-    const sourceYear = data.substring(4);
+    const sourceYear = data.substring(4, 8);
     const sourceDate = new Date(
       `${sourceYear}-${sourceMonth}-${sourceDay}T00:00`
     ).getTime();

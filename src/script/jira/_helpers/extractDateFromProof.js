@@ -1,15 +1,25 @@
 const extractDateFromText = ({ text }) => {
-  const date = text
+  const dateData = text
     .toLowerCase()
-    .replace("od:")
-    .replace("do:")
+    .replace("od:", "")
+    .replace("do:", "")
+    .trim()
     .split(" ")
-    .filter((a) => !a.includes(":"))
     .map((x) => x.replace(/\D/g, ""))
-    .filter((y) => Number(y))
-    .join("");
+    .filter((y) => y.length);
+  const dayTxt = dateData[0];
+  const clockTxt = dateData[1];
+  const todayDateObj = new Date();
+  const dayPart =
+    dayTxt && dayTxt.length
+      ? dayTxt.length === 4
+        ? `${dayTxt}${todayDateObj.getFullYear()}`
+        : dayTxt
+      : "";
+  const clockPart =
+    clockTxt && clockTxt.length ? clockTxt.padStart(4, "0") : "";
 
-  const data = date && date.length < 5 ? date + date.getFullYear() : date;
+  const data = clockPart.length ? `${dayPart}T${clockPart}` : dayPart;
 
   return data;
 };

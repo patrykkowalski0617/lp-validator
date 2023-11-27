@@ -1,4 +1,4 @@
-import { setInputValue } from "../../_helpers";
+import { formatDateTo, setInputValue } from "../../_helpers";
 
 const dateEnd = (taskDateEnd) => {
   if (taskDateEnd) {
@@ -6,10 +6,10 @@ const dateEnd = (taskDateEnd) => {
     if (!inputs.length) return;
     const { data, text } = taskDateEnd;
 
-    const value = `${data.substring(0, 2)}/${data.substring(
-      2,
-      4
-    )}/${data.substring(4)} 23:59`;
+    const value = formatDateTo.slashFormat({
+      dateTxt: data,
+      defaultClockTime: "23:59",
+    });
 
     setInputValue({
       inputs: inputs,
